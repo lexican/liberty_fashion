@@ -18,18 +18,18 @@ class MenMeasurementModel {
 
   Map<String, dynamic> toJson() {
     return {
-      "shoulder": this.shoulder,
-      "sleeve": this.sleeve,
-      'chest': this.chest,
-      'topLength': this.topLength,
-      'bicep': this.bicep,
-      'wrist': this.wrist,
-      'waist': this.waist,
-      'hip': this.hip,
-      'trouserLength': this.trouserLength,
-      'thigh': this.thigh,
-      'trouserTip': this.trouserTip,
-      'info': this.info
+      "shoulder": shoulder,
+      "sleeve": sleeve,
+      'chest': chest,
+      'topLength': topLength,
+      'bicep': bicep,
+      'wrist': wrist,
+      'waist': waist,
+      'hip': hip,
+      'trouserLength': trouserLength,
+      'thigh': thigh,
+      'trouserTip': trouserTip,
+      'info': info
     };
   }
 
