@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:liberty_fashion/models/build_grid_item.dart';
-import 'package:liberty_fashion/utils/parameters.dart';
+import 'package:liberty_fashion/utils/utils.dart';
 
 class BuildListItemCard extends StatelessWidget {
   const BuildListItemCard({Key? key, required this.item, required this.onTap}) : super(key: key);
@@ -11,7 +11,7 @@ class BuildListItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
         elevation: 2,
-        color: Parameters.backgroundColor,
+        color: backgroundColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),

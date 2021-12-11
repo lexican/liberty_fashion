@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:liberty_fashion/screens/collection_list.dart';
+import 'package:liberty_fashion/screens/collection_list/collection_list.dart';
 import 'package:liberty_fashion/utils/parameters.dart';
 
 class Home extends StatefulWidget {

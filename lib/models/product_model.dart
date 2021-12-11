@@ -1,16 +1,16 @@
 class Product {
-  Product({
-    required this.active,
-    required this.catalogId,
-    required this.createDate,
-    required this.description,
-    required this.displayDate,
-    required this.id,
-    required this.modifiedDate,
-    required this.name,
-    required this.productId,
-    required this.shortDescription,
-  });
+  Product(
+      {required this.active,
+      required this.catalogId,
+      required this.createDate,
+      required this.description,
+      required this.displayDate,
+      required this.id,
+      required this.modifiedDate,
+      required this.name,
+      required this.productId,
+      required this.shortDescription,
+      required this.productImageUrl});
 
   bool active;
   int catalogId;
@@ -22,6 +22,7 @@ class Product {
   String name;
   int productId;
   String shortDescription;
+  String productImageUrl;
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
       active: json["active"],
@@ -33,7 +34,8 @@ class Product {
       modifiedDate: DateTime.parse(json["modifiedDate"]),
       name: json["name"],
       productId: json["productId"],
-      shortDescription: json["shortDescription"]);
+      shortDescription: json["shortDescription"],
+      productImageUrl: json["productImageUrl"]);
 
   Map<String, dynamic> toJson() => {
         "active": active,
@@ -45,6 +47,7 @@ class Product {
         "modifiedDate": modifiedDate.toIso8601String(),
         "name": name,
         "productId": productId,
-        "shortDescription": shortDescription
+        "shortDescription": shortDescription,
+        "productImageUrl": productImageUrl
       };
 }
