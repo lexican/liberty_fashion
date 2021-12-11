@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "830630750533",
+    "project_id": "libertyfashion-6303c",
+    "storage_bucket": "libertyfashion-6303c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830630750533:android:a9a5445a7f1a729f47762c",
+        "android_client_info": {
+          "package_name": "com.liberty_fashion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "830630750533-mt3uosmkbcv8v1b47hfhv38mdvd6fmvf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.liberty_fashion",
+            "certificate_hash": "3825756b9b9688ee6b0b332997490db0f590d014"
+          }
+        },
+        {
+          "client_id": "830630750533-8hu0hct4nrdm8u9iln59rf5p0p96b4u5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-plf-dS8LtIEXUujxNS1KWqr_x3Xyd6c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "830630750533-8hu0hct4nrdm8u9iln59rf5p0p96b4u5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
