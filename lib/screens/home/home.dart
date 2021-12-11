@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:liberty_fashion/screens/collection_list/collection_list.dart';
-import 'package:liberty_fashion/utils/parameters.dart';
+import 'package:liberty_fashion/screens/collection_category/collection_category.dart';
+import 'package:liberty_fashion/utils/utils.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
-    const CollectionList(),
+    const CollectionCategory(),
     Container(),
     Container()
   ];
@@ -46,7 +46,7 @@ class _HomeState extends State<Home> {
                 ),
           ],
           currentIndex: _selectedIndex,
-          selectedItemColor: Parameters.primaryColor,
+          selectedItemColor: primaryColor,
           onTap: _onItemTapped,
           backgroundColor: Colors.white,
           type: BottomNavigationBarType.fixed,

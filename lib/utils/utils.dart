@@ -9,6 +9,10 @@ Widget dividerContainer({height = 0.5, width = 0.0, color = Colors.grey}) {
   return Container(height: height, width: width, color: color);
 }
 
+Color hexToColor(String code) {
+  return Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
+}
+
 String moneyFormat(String price) {
   if (price.length > 2) {
     var value = price;

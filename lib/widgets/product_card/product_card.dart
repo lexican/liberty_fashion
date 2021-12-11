@@ -1,14 +1,14 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:liberty_fashion/models/product_model.dart';
+import '../../models/collections_model.dart';
 
 class ProductCard extends StatelessWidget {
-  final Product product;
+  final CollectionsModel collectionsModel;
   final String title;
   const ProductCard({
     Key? key,
-    required this.product,
+    required this.collectionsModel,
     required this.title,
   }) : super(key: key);
   @override
@@ -35,7 +35,7 @@ class ProductCard extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
               child: CachedNetworkImage(
-                imageUrl: product.productImageUrl,
+                imageUrl: collectionsModel.productImageUrl,
                 placeholder: (context, url) => const SizedBox(
                     height: 150,
                     child: Center(child: CircularProgressIndicator())),
@@ -56,7 +56,7 @@ class ProductCard extends StatelessWidget {
               children: <Widget>[
                 Flexible(
                     child: Text(
-                  product.name,
+                  collectionsModel.name,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 )),

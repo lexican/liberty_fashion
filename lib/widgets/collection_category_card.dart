@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:liberty_fashion/models/build_grid_item.dart';
+import 'package:liberty_fashion/models/collections_category_model.dart';
 import 'package:liberty_fashion/utils/utils.dart';
 
-class BuildListItemCard extends StatelessWidget {
-  const BuildListItemCard({Key? key, required this.item, required this.onTap}) : super(key: key);
-  final BuildGridItem item;
+class CollectionCategoryCard extends StatelessWidget {
+  const CollectionCategoryCard({Key? key, required this.item, required this.onTap}) : super(key: key);
+  final CollectionCategoryModel item;
   final Function onTap;
 
   @override
@@ -17,21 +17,20 @@ class BuildListItemCard extends StatelessWidget {
         ),
         child: GestureDetector(
           onTap: () => {
-            onTap(item.collectionName)
+            onTap(item)
           },
           child: Container(
-              //MediaQuery.of(context).size.height * 0.7,
               width: MediaQuery.of(context).size.width * 0.5,
               alignment: Alignment.bottomCenter,
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
-                      image: AssetImage(item.url), fit: BoxFit.cover)),
+                      image: NetworkImage(item.collectionImageUrl), fit: BoxFit.cover)),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  item.title,
+                  item.collectionName,
                   style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
