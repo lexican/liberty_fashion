@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:liberty_fashion/api/collections_category_api.dart';
 import 'package:liberty_fashion/models/collections_category_model.dart';
-import 'package:liberty_fashion/models/collections_model.dart';
 import 'package:liberty_fashion/screens/products/products.dart';
 import 'package:liberty_fashion/utils/utils.dart';
 import 'package:liberty_fashion/widgets/collection_category_card.dart';
@@ -26,9 +25,10 @@ class _CollectionCategoryState extends State<CollectionCategory> {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => Products(
-                collectionCategory: collectionCategory,
-              )),
+        builder: (context) => Products(
+          collectionCategory: collectionCategory,
+        ),
+      ),
     );
   }
 
@@ -85,44 +85,49 @@ class _CollectionCategoryState extends State<CollectionCategory> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: StreamBuilder(
-                  stream: collectionsCategoryApi.streamDataCollection(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (snapshot.hasData) {
-                      if (snapshot.data != null) {
-                        List<CollectionCategoryModel> list =
-                            snapshot.data!.docs.map((DocumentSnapshot doc) {
-                          return CollectionCategoryModel.fromSnapshot(doc);
-                        }).toList();
+                stream: collectionsCategoryApi.streamDataCollection(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasData) {
+                    if (snapshot.data != null) {
+                      List<CollectionCategoryModel> list =
+                          snapshot.data!.docs.map((DocumentSnapshot doc) {
+                        return CollectionCategoryModel.fromSnapshot(doc);
+                      }).toList();
 
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: GridView.count(
-                            childAspectRatio: (itemWidth / itemHeight),
-                            controller:
-                                ScrollController(keepScrollOffset: false),
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10,
-                            primary: false,
-                            children: list.reversed
-                                .map((item) => CollectionCategoryCard(
-                                      item: item,
-                                      onTap: navigateToCollectionPage,
-                                    ))
-                                .toList(),
-                          ),
-                        );
-                      }
-                    } else {
-                      return const SizedBox(
-                          height: 100,
-                          child: Center(child: CircularProgressIndicator()));
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: GridView.count(
+                          childAspectRatio: (itemWidth / itemHeight),
+                          controller: ScrollController(keepScrollOffset: false),
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                          primary: false,
+                          children: list.reversed
+                              .map(
+                                (item) => CollectionCategoryCard(
+                                  item: item,
+                                  onTap: navigateToCollectionPage,
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      );
                     }
-                    return const SizedBox();
-                  }),
+                  } else {
+                    return const SizedBox(
+                      height: 100,
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  }
+                  return const SizedBox();
+                },
+              ),
             )
           ],
         ),

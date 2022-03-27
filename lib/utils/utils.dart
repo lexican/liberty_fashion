@@ -5,6 +5,7 @@ const Color primaryColor = Color(0xffC2128D);
 const Color cGrey = Color(0xff717171);
 const Color backgroundColor = Color(0xffE5E5E5);
 const Color primaryColorLight = Color(0xffed93d2);
+
 Widget dividerContainer({height = 0.5, width = 0.0, color = Colors.grey}) {
   return Container(height: height, width: width, color: color);
 }

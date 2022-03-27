@@ -1,26 +1,28 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class CollectionsModel {
-  CollectionsModel(
+class ProductModel {
+  ProductModel(
       {required this.collectionCategoryId,
       required this.createDate,
       required this.description,
       required this.id,
       required this.name,
       required this.shortDescription,
-      required this.productImageUrl});
+      required this.productImageUrl,
+      this.price});
 
-  String collectionCategoryId;
-  DateTime createDate;
+  dynamic collectionCategoryId;
+  dynamic createDate;
   String description;
   String id;
   String name;
   String shortDescription;
   String productImageUrl;
+  dynamic price;
 
-  factory CollectionsModel.fromSnapshot(DocumentSnapshot doc) {
+  factory ProductModel.fromSnapshot(DocumentSnapshot doc) {
     Map? getDocs = doc.data() as Map?;
-    return CollectionsModel(
+    return ProductModel(
       collectionCategoryId: getDocs!['collectionCategoryId'],
       createDate: getDocs['createDate'],
       description: getDocs['description'],
@@ -28,6 +30,7 @@ class CollectionsModel {
       name: getDocs['name'],
       shortDescription: getDocs['shortDescription'],
       productImageUrl: getDocs['productImageUrl'],
+      price: getDocs['price'],
     );
   }
 
@@ -38,6 +41,7 @@ class CollectionsModel {
         "id": id,
         "name": name,
         "shortDescription": shortDescription,
-        "productImageUrl": productImageUrl
+        "productImageUrl": productImageUrl,
+        "price": price
       };
 }

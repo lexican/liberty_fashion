@@ -43,6 +43,7 @@ android {
         applicationId 'com.liberty_fashion'
         minSdkVersion 19
         targetSdkVersion 30
+        compileSdkVersion 31
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
