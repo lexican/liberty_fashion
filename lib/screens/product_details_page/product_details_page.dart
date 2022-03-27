@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:liberty_fashion/models/product_model.dart';
+import 'package:liberty_fashion/screens/product_details_image/product_details_image.dart';
 import 'package:liberty_fashion/utils/utils.dart';
 
 class ProductDetails extends StatefulWidget {
@@ -68,19 +69,23 @@ class _CollectionDetailsPageState extends State<ProductDetails> {
               ),
               expandedHeight: size.height - size.height / 3,
               flexibleSpace: FlexibleSpaceBar(
-                  background: GestureDetector(
-                      onTap: () => {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => ImagePage(image_url: _src),
-                            //   ),
-                            // )
-                          },
-                      child: Image.network(
-                        product.productImageUrl,
-                        fit: BoxFit.cover,
-                      ))),
+                background: GestureDetector(
+                  onTap: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductDetailsImage(
+                          imageUrl: product.productImageUrl,
+                        ),
+                      ),
+                    )
+                  },
+                  child: Image.network(
+                    product.productImageUrl,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
               actions: <Widget>[
                 IconButton(
                   icon: const Icon(
@@ -133,14 +138,20 @@ class _CollectionDetailsPageState extends State<ProductDetails> {
                         // ),
                       ],
                     ),
-                    // Flexible(
-                    //   child: Text(_description, style: TextStyle(fontSize: 14.0, color: Color(0xff707070)),),
-                    // ),
+                    Flexible(
+                      child: Text(
+                        product.description,
+                        style: const TextStyle(
+                          fontSize: 14.0,
+                          color: Color(0xff707070),
+                        ),
+                      ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: dividerContainer(width: size.width),
                     ),
-                    Container(
+                    SizedBox(
                       width: size.width,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
