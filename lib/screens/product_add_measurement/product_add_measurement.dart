@@ -4,11 +4,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:liberty_fashion/modals/floating_modal.dart';
 import 'package:liberty_fashion/models/cart_model.dart';
 import 'package:liberty_fashion/models/fabric_model.dart';
 import 'package:liberty_fashion/models/product_model.dart';
 import 'package:liberty_fashion/models/women_measurement_model.dart';
+import 'package:liberty_fashion/screens/men_measurement_modal/men_measurement_modal.dart';
 import 'package:liberty_fashion/screens/men_measurement_view/men_measurement_view.dart';
+import 'package:liberty_fashion/screens/women_measurement_modal/woman_measurement_modal.dart';
 import 'package:liberty_fashion/screens/women_measurement_view/women_measurement_view.dart';
 import 'package:liberty_fashion/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -68,6 +71,9 @@ class _ProceedPageState extends State<ProceedPage> {
   void initState() {
     product = widget.product;
     collectionName = widget.collectionName;
+
+    print("collectionName: " + collectionName);
+
     mode = widget.mode;
     if (widget.cart != null) {
       cart = widget.cart!;
@@ -99,112 +105,118 @@ class _ProceedPageState extends State<ProceedPage> {
     super.initState();
   }
 
-  // void updateMeasurement() {
-  //   loadMenMeasurement();
-  //   loadWomenMeasurement();
-  // }
+  void updateMeasurement() {
+    loadMenMeasurement();
+    loadWomenMeasurement();
+  }
 
   void openMeasurementForm() {
     if (gender == "Male") {
-      // Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //         builder: (context) => MenMeasurementModal(
-      //               onSave: updateMeasurement,
-      //               type: menStyle,
-      //             )));
-      //   showFloatingModalBottomSheet(
-      //       context: context,
-      //       builder: (context, scrollController) => MenMeasurementModal(
-      //             onSave: updateMeasurement,
-      //             type: menStyle,
-      //           ));
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MenMeasurementModal(
+            onSave: updateMeasurement,
+            type: menStyle,
+          ),
+        ),
+      );
+      showFloatingModalBottomSheet(
+        context: context,
+        builder: (context, scrollController) => MenMeasurementModal(
+          onSave: updateMeasurement,
+          type: menStyle,
+        ),
+      );
     } else {
-      // Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //         builder: (context) => WomenMeasurementModal(
-      //               type: womenStyle,
-      //               onSave: updateMeasurement,
-      //             )));
-      //   showFloatingModalBottomSheet(
-      //       context: context,
-      //       builder: (context, scrollController) => WomenMeasurementModal(
-      //             type: womenStyle,
-      //             onSave: updateMeasurement,
-      //           ));
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => WomenMeasurementModal(
+            type: womenStyle,
+            onSave: updateMeasurement,
+          ),
+        ),
+      );
+      showFloatingModalBottomSheet(
+        context: context,
+        builder: (context, scrollController) => WomenMeasurementModal(
+          type: womenStyle,
+          onSave: updateMeasurement,
+        ),
+      );
     }
   }
 
-  // void loadMenMeasurement() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   setState(() {
-  //     if (prefs.getString("measurementMen") != null) {
-  //       Map<String, dynamic> item =
-  //           json.decode(prefs.getString("measurementMen") ?? "");
-  //       //print("item: ${item}");
-  //       measurementMen.shoulder = item['shoulder'];
-  //       measurementMen.sleeve = item['sleeve'];
-  //       measurementMen.chest = item['chest'];
-  //       measurementMen.topLength = item['topLength'];
+  void loadMenMeasurement() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      if (prefs.getString("measurementMen") != null) {
+        Map<String, dynamic> item =
+            json.decode(prefs.getString("measurementMen") ?? "");
+        //print("item: ${item}");
+        measurementMen.shoulder = item['shoulder'];
+        measurementMen.sleeve = item['sleeve'];
+        measurementMen.chest = item['chest'];
+        measurementMen.topLength = item['topLength'];
 
-  //       measurementMen.bicep = item['bicep'];
-  //       measurementMen.wrist = item['wrist'];
+        measurementMen.bicep = item['bicep'];
+        measurementMen.wrist = item['wrist'];
 
-  //       measurementMen.hip = item['hip'];
-  //       measurementMen.trouserLength = item['trouserLength'];
-  //       measurementMen.thigh = item['thigh'];
-  //       measurementMen.trouserTip = item['trouserTip'];
-  //       measurementMen.info = item['info'];
-  //     }
-  //   });
-  // }
+        measurementMen.hip = item['hip'];
+        measurementMen.trouserLength = item['trouserLength'];
+        measurementMen.thigh = item['thigh'];
+        measurementMen.trouserTip = item['trouserTip'];
+        measurementMen.info = item['info'];
+      }
+    });
+  }
 
-  // void loadWomenMeasurement() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   setState(() {
-  //     if (prefs.getString("measurementWomen") != null) {
-  //       Map<String, dynamic> item =
-  //           json.decode(prefs.getString("measurementWomen") ?? "");
+  void loadWomenMeasurement() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      if (prefs.getString("measurementWomen") != null) {
+        Map<String, dynamic> item =
+            json.decode(prefs.getString("measurementWomen") ?? "");
 
-  //       measurementWomen.shoulder = item['shoulder'];
+        measurementWomen.shoulder = item['shoulder'];
 
-  //       measurementWomen.sleeve = item['sleeve'];
+        measurementWomen.sleeve = item['sleeve'];
 
-  //       measurementWomen.sleeveShortLength = item['sleeveShortLength'];
-  //       measurementWomen.sleeve34Length = item['sleeve34Length'];
-  //       measurementWomen.sleeveFullLength = item['sleeveFullLength'];
+        measurementWomen.sleeveShortLength = item['sleeveShortLength'];
+        measurementWomen.sleeve34Length = item['sleeve34Length'];
+        measurementWomen.sleeveFullLength = item['sleeveFullLength'];
 
-  //       measurementWomen.bust = item['bust'];
-  //       measurementWomen.bustPoint = item['bustPoint'];
+        measurementWomen.bust = item['bust'];
+        measurementWomen.bustPoint = item['bustPoint'];
 
-  //       measurementWomen.shoulderToUnderBust = item['shoulderToUnderBust'];
-  //       measurementWomen.roundUnderBust = item['roundUnderBust'];
-  //       measurementWomen.halfLength = item['halfLength'];
-  //       measurementWomen.blouseWaist = item['blouseWaist'];
-  //       measurementWomen.blouseLength = item['blouseLength'];
+        measurementWomen.shoulderToUnderBust = item['shoulderToUnderBust'];
+        measurementWomen.roundUnderBust = item['roundUnderBust'];
+        measurementWomen.halfLength = item['halfLength'];
+        measurementWomen.blouseWaist = item['blouseWaist'];
+        measurementWomen.blouseLength = item['blouseLength'];
 
-  //       measurementWomen.skirtWaist = item['skirtWaist'];
-  //       measurementWomen.hips = item['hips'];
+        measurementWomen.skirtWaist = item['skirtWaist'];
+        measurementWomen.hips = item['hips'];
 
-  //       measurementWomen.dressLength = item['dressLength'];
+        measurementWomen.dressLength = item['dressLength'];
 
-  //       measurementWomen.dress34Length = item['dress34Length'];
-  //       measurementWomen.dressKneeLength = item['dressKneeLength'];
-  //       measurementWomen.dressHalfLength = item['dressHalfLength'];
-  //       measurementWomen.dressFloorLength = item['dressFloorLength'];
+        measurementWomen.dress34Length = item['dress34Length'];
+        measurementWomen.dressKneeLength = item['dressKneeLength'];
+        measurementWomen.dressHalfLength = item['dressHalfLength'];
+        measurementWomen.dressFloorLength = item['dressFloorLength'];
 
-  //       measurementWomen.skirtLength = item['skirtLength'];
+        measurementWomen.skirtLength = item['skirtLength'];
 
-  //       measurementWomen.skirt34Length = item['skirt34Length'];
-  //       measurementWomen.skirtKneeLength = item['skirtKneeLength'];
-  //       measurementWomen.skirtShortLength = item['skirtShortLength'];
-  //       measurementWomen.skirtFloorLength = item['skirtFloorLength'];
+        measurementWomen.skirt34Length = item['skirt34Length'];
+        measurementWomen.skirtKneeLength = item['skirtKneeLength'];
+        measurementWomen.skirtShortLength = item['skirtShortLength'];
+        measurementWomen.skirtFloorLength = item['skirtFloorLength'];
 
-  //       measurementWomen.info = item['info'];
-  //     }
-  //   });
-  // }
+        measurementWomen.info = item['info'];
+      }
+    });
+  }
 
   void loadData() {
     if (widget.collectionName == "Children") {
@@ -883,41 +895,43 @@ class _ProceedPageState extends State<ProceedPage> {
                           collectionName != "Fabrics"
                               ? GestureDetector(
                                   onTap: () {
-                                    // if (collectionName == "Men") {
-                                    //   showFloatingModalBottomSheet(
-                                    //     context: context,
-                                    //     builder: (context, scrollController) =>
-                                    //         MenMeasurementModal(
-                                    //       type: menStyle,
-                                    //       onSave: updateMeasurement,
-                                    //     ),
-                                    //   );
-                                    // } else if (collectionName == "Women") {
-                                    //   showFloatingModalBottomSheet(
-                                    //     context: context,
-                                    //     builder: (context, scrollController) =>
-                                    //         WomenMeasurementModal(
-                                    //       onSave: updateMeasurement,
-                                    //     ),
-                                    //   );
-                                    // } else if (showAll && gender == "Male") {
-                                    //   showFloatingModalBottomSheet(
-                                    //     context: context,
-                                    //     builder: (context, scrollController) =>
-                                    //         MenMeasurementModal(
-                                    //       type: menStyle,
-                                    //       onSave: updateMeasurement,
-                                    //     ),
-                                    //   );
-                                    // } else if (showAll && gender == "Female") {
-                                    //   showFloatingModalBottomSheet(
-                                    //     context: context,
-                                    //     builder: (context, scrollController) =>
-                                    //         WomenMeasurementModal(
-                                    //       onSave: updateMeasurement,
-                                    //     ),
-                                    //   );
-                                    // }
+                                    if (collectionName == "Men") {
+                                      showFloatingModalBottomSheet(
+                                        context: context,
+                                        builder: (context, scrollController) =>
+                                            MenMeasurementModal(
+                                          type: menStyle,
+                                          onSave: () {},
+                                        ),
+                                      );
+                                    } else if (collectionName == "Women") {
+                                      showFloatingModalBottomSheet(
+                                        context: context,
+                                        builder: (context, scrollController) =>
+                                            WomenMeasurementModal(
+                                          type: womenStyle,
+                                          onSave: () {},
+                                        ),
+                                      );
+                                    } else if (showAll && gender == "Male") {
+                                      showFloatingModalBottomSheet(
+                                        context: context,
+                                        builder: (context, scrollController) =>
+                                            MenMeasurementModal(
+                                          type: menStyle,
+                                          onSave: () {},
+                                        ),
+                                      );
+                                    } else if (showAll && gender == "Female") {
+                                      showFloatingModalBottomSheet(
+                                        context: context,
+                                        builder: (context, scrollController) =>
+                                            WomenMeasurementModal(
+                                          type: womenStyle,
+                                          onSave: updateMeasurement,
+                                        ),
+                                      );
+                                    }
                                   },
                                   child: Container(
                                     height: 80,

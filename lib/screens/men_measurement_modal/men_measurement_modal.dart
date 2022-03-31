@@ -35,9 +35,9 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
   final TextEditingController _info = TextEditingController();
 
   final TextStyle labelStyle =
-      TextStyle(color: Colors.black87, fontSize: 16, fontFamily: 'SegoeUi');
+      const TextStyle(color: Colors.black87, fontSize: 16, fontFamily: 'SegoeUi');
   final textStyle =
-      TextStyle(color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi');
+     const TextStyle(color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi');
 
   late String type;
   late String info;
@@ -49,7 +49,7 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
     loadMenMeasurement();
   }
 
-  validateAndSubmitMenMeasurement() async {
+  void validateAndSubmitMenMeasurement() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (_formKey.currentState!.validate()) {
       await prefs.setString(
@@ -59,7 +59,7 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
     }
   }
 
-  loadMenMeasurement() async {
+  void loadMenMeasurement() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       if (prefs.getString("measurementMen") != null) {
