@@ -375,6 +375,8 @@ class _ProceedPageState extends State<ProceedPage> {
   }
 
   Widget cartItem() {
+    String productName = product.name ?? "";
+    String fabricName = fabric.name ?? "";
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10),
       height: 120,
@@ -456,23 +458,20 @@ class _ProceedPageState extends State<ProceedPage> {
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         style: const TextStyle(
-                            fontFamily: "SegoeUi", fontSize: 14),
+                          fontFamily: "SegoeUi",
+                          fontSize: 14,
+                        ),
                       )
                     : Text(
-                        product.name ?? "",
+                        productName +
+                            (fabricName != "" ? (" + " + fabricName) : ""),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         style: const TextStyle(
-                            fontFamily: "SegoeUi", fontSize: 14),
+                          fontFamily: "SegoeUi",
+                          fontSize: 14,
+                        ),
                       ),
-                //                   : Text(
-                //   product.name
-                //       " " + fabric.name,
-                //   overflow: TextOverflow.ellipsis,
-                //   maxLines: 2,
-                //   style:
-                //       const TextStyle(fontFamily: "SegoeUi", fontSize: 14),
-                // ),
                 const SizedBox(
                   height: 6,
                 ),
@@ -481,7 +480,10 @@ class _ProceedPageState extends State<ProceedPage> {
                       moneyFormat(fabric.price != null
                           ? (product.price + fabric.price).toString()
                           : product.price.toString()),
-                  style: const TextStyle(fontFamily: "SegoeUi", fontSize: 14),
+                  style: const TextStyle(
+                    fontFamily: "SegoeUi",
+                    fontSize: 14,
+                  ),
                 )
               ],
             ),
@@ -866,7 +868,7 @@ class _ProceedPageState extends State<ProceedPage> {
                                                   fontFamily: "Roboto",
                                                   fontSize: 14,
                                                   color:
-                                                      const Color(0xFF686868),
+                                                      Color(0xFF686868),
                                                 ),
                                               )
                                             ],
