@@ -8,6 +8,8 @@ import 'package:liberty_fashion/models/cart_model.dart';
 import 'package:liberty_fashion/models/fabric_model.dart';
 import 'package:liberty_fashion/models/product_model.dart';
 import 'package:liberty_fashion/models/women_measurement_model.dart';
+import 'package:liberty_fashion/screens/men_measurement_view/men_measurement_view.dart';
+import 'package:liberty_fashion/screens/women_measurement_view/women_measurement_view.dart';
 import 'package:liberty_fashion/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
@@ -867,8 +869,7 @@ class _ProceedPageState extends State<ProceedPage> {
                                                 style: TextStyle(
                                                   fontFamily: "Roboto",
                                                   fontSize: 14,
-                                                  color:
-                                                      Color(0xFF686868),
+                                                  color: Color(0xFF686868),
                                                 ),
                                               )
                                             ],
@@ -1023,39 +1024,38 @@ class _ProceedPageState extends State<ProceedPage> {
                         )
                       : Container(),
 
-                  //Expanded(child: showMeasurement ? measurement() : Container()),
-                  // collectionName == "Men"
-                  //     ? MenTakenMeasurement(
-                  //         type: menStyle,
-                  //         measurementMen: measurementMen,
-                  //         onEditFunction: openMeasurementForm,
-                  //         showEditIcon: true,
-                  //       )
-                  //     : Container(),
-                  // collectionName == "Women"
-                  //     ? WomenTakenMeasurement(
-                  //         measurementWomen: measurementWomen,
-                  //         onEditFunction: openMeasurementForm,
-                  //         showEditIcon: true,
-                  //         type: womenStyle,
-                  //       )
-                  //     : Container(),
-                  // (showAll && gender == "Male")
-                  //     ? MenTakenMeasurement(
-                  //         type: menStyle,
-                  //         measurementMen: measurementMen,
-                  //         onEditFunction: openMeasurementForm,
-                  //         showEditIcon: true,
-                  //       )
-                  //     : Container(),
-                  // (showAll && gender == "Female")
-                  //     ? WomenTakenMeasurement(
-                  //         measurementWomen: measurementWomen,
-                  //         onEditFunction: openMeasurementForm,
-                  //         showEditIcon: true,
-                  //         type: womenStyle,
-                  //       )
-                  //     : Container(),
+                  collectionName == "Men"
+                      ? MenMeasurementView(
+                          type: menStyle,
+                          measurementMen: measurementMen,
+                          onEditFunction: openMeasurementForm,
+                          showEditIcon: true,
+                        )
+                      : Container(),
+                  collectionName == "Women"
+                      ? WomenMeasurementView(
+                          measurementWomen: measurementWomen,
+                          onEditFunction: openMeasurementForm,
+                          showEditIcon: true,
+                          type: womenStyle,
+                        )
+                      : Container(),
+                  (showAll && gender == "Male")
+                      ? MenMeasurementView(
+                          type: menStyle,
+                          measurementMen: measurementMen,
+                          onEditFunction: openMeasurementForm,
+                          showEditIcon: true,
+                        )
+                      : Container(),
+                  (showAll && gender == "Female")
+                      ? WomenMeasurementView(
+                          measurementWomen: measurementWomen,
+                          onEditFunction: openMeasurementForm,
+                          showEditIcon: true,
+                          type: womenStyle,
+                        )
+                      : Container(),
 
                   const SizedBox(
                     height: 10,

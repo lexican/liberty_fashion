@@ -172,16 +172,16 @@ class _CollectionDetailsPageState extends State<ProductDetails> {
                           ),
                           TextButton(
                             onPressed: () => {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ProceedPage(
-                                    collectionName: widget.collectionCategoryModel.collectionName,
-                                    mode: "New",
-                                    product: product,
-                                  ),
-                                ),
-                              )
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => ProceedPage(
+                              //       collectionName: widget.collectionCategoryModel.collectionName,
+                              //       mode: "New",
+                              //       product: product,
+                              //     ),
+                              //   ),
+                              //)
                             },
                             style: ButtonStyle(
                               backgroundColor:
