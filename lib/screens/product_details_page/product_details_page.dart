@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:liberty_fashion/models/collections_category_model.dart';
 import 'package:liberty_fashion/models/product_model.dart';
+import 'package:liberty_fashion/screens/product_add_measurement/product_add_measurement.dart';
 import 'package:liberty_fashion/screens/product_details_image/product_details_image.dart';
 import 'package:liberty_fashion/utils/utils.dart';
 
 class ProductDetails extends StatefulWidget {
   final ProductModel product;
+  final CollectionCategoryModel collectionCategoryModel;
 
   const ProductDetails({
     Key? key,
-    required this.product,
+    required this.product, required this.collectionCategoryModel,
   }) : super(key: key);
   @override
   _CollectionDetailsPageState createState() => _CollectionDetailsPageState();
@@ -75,13 +78,13 @@ class _CollectionDetailsPageState extends State<ProductDetails> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => ProductDetailsImage(
-                          imageUrl: product.productImageUrl,
+                          imageUrl: product.productImageUrl ?? "",
                         ),
                       ),
                     )
                   },
                   child: Image.network(
-                    product.productImageUrl,
+                    product.productImageUrl ?? "",
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -119,7 +122,7 @@ class _CollectionDetailsPageState extends State<ProductDetails> {
                       children: <Widget>[
                         Flexible(
                           child: Text(
-                            product.name,
+                            product.name ?? "",
                             style: const TextStyle(fontSize: 20),
                           ),
                         ),
@@ -140,7 +143,7 @@ class _CollectionDetailsPageState extends State<ProductDetails> {
                     ),
                     Flexible(
                       child: Text(
-                        product.description,
+                        product.description ?? "",
                         style: const TextStyle(
                           fontSize: 14.0,
                           color: Color(0xff707070),
@@ -169,18 +172,16 @@ class _CollectionDetailsPageState extends State<ProductDetails> {
                           ),
                           TextButton(
                             onPressed: () => {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) => ProceedPage(
-                              //       item: item,
-                              //       src: _src,
-                              //       price: _price,
-                              //       collectionName: _collectionName,
-                              //       mode: "New",
-                              //     ),
-                              //   ),
-                              // )
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProceedPage(
+                                    collectionName: widget.collectionCategoryModel.collectionName,
+                                    mode: "New",
+                                    product: product,
+                                  ),
+                                ),
+                              )
                             },
                             style: ButtonStyle(
                               backgroundColor:

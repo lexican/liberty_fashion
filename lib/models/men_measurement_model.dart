@@ -1,20 +1,20 @@
 class MenMeasurementModel {
-  double shoulder;
-  double sleeve;
-  double chest;
-  double topLength;
+  double? shoulder = 0.0;
+  double? sleeve = 0.0;
+  double? chest = 0.0;
+  double? topLength = 0.0;
 
-  double bicep;
-  double wrist;
+  double? bicep = 0.0;
+  double? wrist = 0.0;
 
-  double waist;
+  double? waist = 0.0;
 
-  double hip;
-  double trouserLength;
-  double thigh;
-  double trouserTip;
+  double? hip = 0.0;
+  double? trouserLength = 0.0;
+  double? thigh = 0.0;
+  double? trouserTip = 0.0;
 
-  String info;
+  String? info;
 
   Map<String, dynamic> toJson() {
     return {
@@ -34,16 +34,16 @@ class MenMeasurementModel {
   }
 
   MenMeasurementModel(
-      {required this.shoulder,
-      required this.sleeve,
-      required this.chest,
-      required this.topLength,
-      required this.bicep,
-      required this.wrist,
-      required this.waist,
-      required this.hip,
-      required this.trouserLength,
-      required this.thigh,
-      required this.trouserTip,
-      required this.info});
+      {this.shoulder,
+      this.sleeve,
+      this.chest,
+      this.topLength,
+      this.bicep,
+      this.wrist,
+      this.waist,
+      this.hip,
+      this.trouserLength,
+      this.thigh,
+      this.trouserTip,
+      this.info});
 }

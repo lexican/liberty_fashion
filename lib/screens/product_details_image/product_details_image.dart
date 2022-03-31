@@ -23,8 +23,9 @@ class ProductDetailsImage extends StatelessWidget {
               height: size.height - 24,
               width: size.width,
               decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage(imageUrl), fit: BoxFit.cover)),
+                image: DecorationImage(
+                    image: NetworkImage(imageUrl), fit: BoxFit.cover),
+              ),
             ),
             Positioned(
               top: 0,

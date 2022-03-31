@@ -1,15 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:liberty_fashion/models/collections_category_model.dart';
 import 'package:liberty_fashion/screens/product_details_page/product_details_page.dart';
 import '../../models/product_model.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductModel product;
   final String title;
+  final CollectionCategoryModel collectionCategoryModel;
   const ProductCard({
     Key? key,
     required this.product,
     required this.title,
+    required this.collectionCategoryModel,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -24,8 +27,8 @@ class ProductCard extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => ProductDetails(
-                    product: product,
-                  ),
+                      product: product,
+                      collectionCategoryModel: collectionCategoryModel),
                 ),
               )
             },
@@ -59,7 +62,7 @@ class ProductCard extends StatelessWidget {
               children: <Widget>[
                 Flexible(
                   child: Text(
-                    product.name,
+                    product.name ?? "",
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),

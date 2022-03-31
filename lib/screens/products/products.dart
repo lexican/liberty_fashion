@@ -8,10 +8,10 @@ import 'package:liberty_fashion/utils/utils.dart';
 import 'package:liberty_fashion/widgets/product_card/product_card.dart';
 
 class Products extends StatefulWidget {
+  final CollectionCategoryModel collectionCategory;
+
   const Products({Key? key, required this.collectionCategory})
       : super(key: key);
-
-  final CollectionCategoryModel collectionCategory;
 
   @override
   State<Products> createState() => _ProductsState();
@@ -104,6 +104,7 @@ class _ProductsState extends State<Products> {
                       return ProductCard(
                         product: collections[index],
                         title: "",
+                        collectionCategoryModel: widget.collectionCategory,
                       );
                     },
                     staggeredTileBuilder: (int index) =>
