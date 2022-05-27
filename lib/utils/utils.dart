@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
 const constpadding = EdgeInsets.only(left: 30, right: 30);
 const Color primaryColor = Color(0xffC2128D);
@@ -61,3 +62,13 @@ String validatePhoneNumber(String value) {
     return '';
   }
 }
+
+final logger = Logger(
+  printer: PrettyPrinter(
+      methodCount: 2,
+      errorMethodCount: 5,
+      lineLength: 140,
+      colors: true,
+      printEmojis: true,
+      printTime: true),
+);
