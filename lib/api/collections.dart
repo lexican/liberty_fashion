@@ -17,6 +17,15 @@ class CollectionsApi {
         .snapshots();
   }
 
+  Stream<QuerySnapshot> getDocumentForFabrics(String id) {
+    return ref
+        .where("collectionCategoryId",
+            isEqualTo: FirebaseFirestore.instance
+                .collection("collectionsCategory")
+                .doc(id))
+        .snapshots();
+  }
+
   Stream<QuerySnapshot> streamDataCollection() {
     return ref.snapshots();
   }

@@ -9,6 +9,7 @@ import 'package:liberty_fashion/models/cart_model.dart';
 import 'package:liberty_fashion/models/fabric_model.dart';
 import 'package:liberty_fashion/models/product_model.dart';
 import 'package:liberty_fashion/models/women_measurement_model.dart';
+import 'package:liberty_fashion/screens/fabric_list/fabric_list.dart';
 import 'package:liberty_fashion/screens/men_measurement_modal/men_measurement_modal.dart';
 import 'package:liberty_fashion/screens/men_measurement_view/men_measurement_view.dart';
 import 'package:liberty_fashion/screens/women_measurement_modal/woman_measurement_modal.dart';
@@ -81,7 +82,7 @@ class _ProceedPageState extends State<ProceedPage> {
 
     gender = "Male";
 
-    // _numberOfYardsCL.text = 4.0.toString();
+    _numberOfYardsCL.text = 4.0.toString();
 
     if (mode == "New") {
       if (widget.collectionName == "Children") {
@@ -93,14 +94,14 @@ class _ProceedPageState extends State<ProceedPage> {
         });
       }
 
-      // loadMenMeasurement();
-      // loadWomenMeasurement();
+      loadMenMeasurement();
+      loadWomenMeasurement();
     } else {
-      //_numberOfYardsCL.text = widget.cart!.fabricNoOfYards.toString();
+      _numberOfYardsCL.text = widget.cart!.fabricNoOfYards.toString();
 
-      // print("widget.cart.fabricNoOfYards " +
-      //     widget.cart!.fabricNoOfYards.toString());
-      // loadData();
+      print("widget.cart.fabricNoOfYards " +
+          widget.cart!.fabricNoOfYards.toString());
+      loadData();
     }
     super.initState();
   }
@@ -178,7 +179,6 @@ class _ProceedPageState extends State<ProceedPage> {
       if (prefs.getString("measurementWomen") != null) {
         Map<String, dynamic> item =
             json.decode(prefs.getString("measurementWomen") ?? "");
-
         measurementWomen.shoulder = item['shoulder'];
 
         measurementWomen.sleeve = item['sleeve'];
@@ -241,6 +241,7 @@ class _ProceedPageState extends State<ProceedPage> {
         gender = "Male";
       });
     }
+
     // if (collectionName == "Fabrics") {
     //   setState(() {
     //     fabric.id = cart.fabricId;
@@ -336,24 +337,23 @@ class _ProceedPageState extends State<ProceedPage> {
   //     fontWeight: FontWeight.w500);
 
   void pushToNewScreen(BuildContext context) {
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //       builder: (context) => FabricGrid(
-    //             selectedId: fabric != null ? fabric.id : -1,
-    //           )),
-    // ).then((value) {
-    //   // if value is true you get the result as bool else no result
-    //   if (value != null) {
-    //     setState(() {
-    //       fabric = value;
-    //     });
-    //     print("Value ${value.url.toString()}");
-    //     print('Do something after getting result');
-    //   } else {
-    //     print('Do nothing');
-    //   }
-    // });
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => FabricList(
+          selectedId: fabric.id ?? "",
+        ),
+      ),
+    ).then((value) {
+      // if value is true you get the result as bool else no result
+      if (value != null) {
+        setState(() {
+          fabric = value;
+        });
+      } else {
+        print('Do nothing');
+      }
+    });
   }
 
   void _showPicker(context) {
@@ -507,102 +507,102 @@ class _ProceedPageState extends State<ProceedPage> {
     );
   }
 
-  // Widget bottom() {
-  //   return Container(
-  //     margin: const EdgeInsets.only(top: 6, bottom: 20),
-  //     child: Row(
-  //       children: [
-  //         Expanded(
-  //           child: RaisedButton(
-  //             shape: RoundedRectangleBorder(
-  //                 borderRadius: BorderRadius.circular(4.0),
-  //                 side: const BorderSide(color: primaryColor)),
-  //             onPressed: () {
-  //               // Navigator.push(
-  //               //   context,
-  //               //   MaterialPageRoute(builder: (context) => LandingPage()),
-  //               // );
-  //             },
-  //             color: Colors.white,
-  //             textColor: primaryColor,
-  //             child: Text("CONTINUE SHOPPING".toUpperCase(),
-  //                 style: const TextStyle(fontSize: 14)),
-  //           ),
-  //         ),
-  //         const SizedBox(
-  //           width: 5,
-  //         ),
-  //         Expanded(
-  //           child: FlatButton(
-  //             shape: RoundedRectangleBorder(
-  //                 borderRadius: BorderRadius.circular(4.0),
-  //                 side: const BorderSide(color: Colors.red)),
-  //             color: primaryColor,
-  //             textColor: Colors.white,
-  //             padding: const EdgeInsets.all(8.0),
-  //             onPressed: () {
-  //               if (collectionName == "Fabric") {
-  //                 addToCart(fabric);
-  //                 // Navigator.push(
-  //                 //   context,
-  //                 //   MaterialPageRoute(
-  //                 //     builder: (context) => CartPage(),
-  //                 //   ),
-  //                 // );
-  //               } else {
-  //                 if (fabric.name == null) {
-  //                   Fluttertoast.showToast(
-  //                       msg: "No Fabric selected",
-  //                       toastLength: Toast.LENGTH_SHORT,
-  //                       gravity: ToastGravity.CENTER,
-  //                       timeInSecForIosWeb: 1,
-  //                       backgroundColor: Colors.red,
-  //                       textColor: Colors.white,
-  //                       fontSize: 16.0);
-  //                 } else if (numberOfYards > 12) {
-  //                   Fluttertoast.showToast(
-  //                       msg: "Maximun number of yards is 12",
-  //                       toastLength: Toast.LENGTH_SHORT,
-  //                       gravity: ToastGravity.CENTER,
-  //                       timeInSecForIosWeb: 1,
-  //                       backgroundColor: Colors.red,
-  //                       textColor: Colors.white,
-  //                       fontSize: 16.0);
-  //                 } else if (numberOfYards < 4) {
-  //                   Fluttertoast.showToast(
-  //                       msg: "Minimun number of yards is 4",
-  //                       toastLength: Toast.LENGTH_SHORT,
-  //                       gravity: ToastGravity.CENTER,
-  //                       timeInSecForIosWeb: 1,
-  //                       backgroundColor: Colors.red,
-  //                       textColor: Colors.white,
-  //                       fontSize: 16.0);
-  //                 } else {
-  //                   print("here");
-  //                   addToCart(product);
-  //                   // Navigator.push(
-  //                   //   context,
-  //                   //   MaterialPageRoute(
-  //                   //     builder: (context) => CartPage(),
-  //                   //   ),
-  //                   // );
-  //                 }
-  //               }
-  //             },
-  //             child: Text(
-  //               mode == "New" ? "ADD TO CART" : "Update",
-  //               style: const TextStyle(
-  //                 fontSize: 14.0,
-  //               ),
-  //             ),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+  Widget bottom() {
+    return Container(
+      margin: const EdgeInsets.only(top: 6, bottom: 20),
+      child: Row(
+        children: [
+          Expanded(
+            child: RaisedButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4.0),
+                  side: const BorderSide(color: primaryColor)),
+              onPressed: () {
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => LandingPage()),
+                // );
+              },
+              color: Colors.white,
+              textColor: primaryColor,
+              child: Text("CONTINUE SHOPPING".toUpperCase(),
+                  style: const TextStyle(fontSize: 14)),
+            ),
+          ),
+          const SizedBox(
+            width: 5,
+          ),
+          Expanded(
+            child: FlatButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4.0),
+                  side: const BorderSide(color: Colors.red)),
+              color: primaryColor,
+              textColor: Colors.white,
+              padding: const EdgeInsets.all(8.0),
+              onPressed: () {
+                if (collectionName == "Fabric") {
+                  addToCart(fabric);
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => CartPage(),
+                  //   ),
+                  // );
+                } else {
+                  if (fabric.name == null) {
+                    Fluttertoast.showToast(
+                        msg: "No Fabric selected",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                  } else if (numberOfYards > 12) {
+                    Fluttertoast.showToast(
+                        msg: "Maximun number of yards is 12",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                  } else if (numberOfYards < 4) {
+                    Fluttertoast.showToast(
+                        msg: "Minimun number of yards is 4",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                  } else {
+                    print("here");
+                    addToCart(product);
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => CartPage(),
+                    //   ),
+                    // );
+                  }
+                }
+              },
+              child: Text(
+                mode == "New" ? "ADD TO CART" : "Update",
+                style: const TextStyle(
+                  fontSize: 14.0,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
-  setSelectedGender(value) {
+  void setSelectedGender(value) {
     if (value != gender) {
       setState(() {
         gender = value;
@@ -1088,7 +1088,10 @@ class _ProceedPageState extends State<ProceedPage> {
                       )
                     ],
                   ),
-                  //bottom()
+                   const SizedBox(
+                    height: 10,
+                  ),
+                  bottom()
                 ],
               ),
             ),

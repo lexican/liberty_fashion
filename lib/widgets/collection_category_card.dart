@@ -35,9 +35,10 @@ class CollectionCategoryCard extends StatelessWidget {
             child: Text(
               item.collectionName,
               style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xffFCFCFC)),
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Color(0xffFCFCFC),
+              ),
               textAlign: TextAlign.center,
             ),
           ),
