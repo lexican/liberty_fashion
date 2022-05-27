@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:liberty_fashion/screens/home/home.dart';
+import 'package:liberty_fashion/src/features/home/home.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
