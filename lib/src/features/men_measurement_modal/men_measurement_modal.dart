@@ -35,13 +35,8 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
 
   final TextEditingController _info = TextEditingController();
 
-  final TextStyle labelStyle = const TextStyle(
-      color: Colors.black87, fontSize: 16, fontFamily: 'SegoeUi');
-  final textStyle = const TextStyle(
-      color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi');
 
   late String type;
-  late String info;
 
   @override
   void initState() {
@@ -67,7 +62,7 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
         Map<String, dynamic> item =
             json.decode(prefs.getString("measurementMen") ?? "");
 
-        //print("item: ${item}");
+        logger.i("Measurement Men Item: $item");
 
         measurementMen.shoulder = item['shoulder'];
         measurementMen.sleeve = item['sleeve'];
