@@ -44,14 +44,14 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
   final TextEditingController _skirtWaistWn = TextEditingController();
   final TextEditingController _hipsWn = TextEditingController();
 
-  final TextEditingController _dressLengthWn = TextEditingController();
+  //final TextEditingController _dressLengthWn = TextEditingController();
 
   final TextEditingController _dresskneeLengthWn = TextEditingController();
   final TextEditingController _dress34LengthWn = TextEditingController();
   final TextEditingController _dressfloorLengthWn = TextEditingController();
   final TextEditingController _dress12LengthWn = TextEditingController();
 
-  final TextEditingController _skirtLengthWn = TextEditingController();
+  //final TextEditingController _skirtLengthWn = TextEditingController();
 
   final TextEditingController _skirtShortLengthWn = TextEditingController();
   final TextEditingController _skirtLongLengthWn = TextEditingController();
@@ -531,7 +531,7 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
             Expanded(
               child: LibertyFashionTextField(
                 labelText: 'Skirt Short Length(in)',
-                controller: _skirtLongLengthWn,
+                controller: _skirtShortLengthWn,
                 onChanged: (String val) {
                   measurementWomen.skirtShortLength = double.parse(val);
                 },
@@ -604,7 +604,7 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
           Expanded(
             child: LibertyFashionTextField(
               labelText: "Additional Information",
-              controller: _skirtLongLengthWn,
+              controller: _info,
               onChanged: (String val) {
                 measurementWomen.info = val;
               },
