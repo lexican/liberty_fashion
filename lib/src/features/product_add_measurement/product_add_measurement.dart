@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:liberty_fashion/src/core/models/models.dart';
 import 'package:liberty_fashion/src/core/utils/utils.dart';
+import 'package:liberty_fashion/src/core/widgets/buttons/liberty_fashion_button.dart';
 import 'package:liberty_fashion/src/core/widgets/decimal_text_input_formatter/decimal_text_input_formatter.dart';
 import 'package:liberty_fashion/src/core/widgets/modals/floating_modal.dart';
 import 'package:liberty_fashion/src/features/fabric_list/fabric_list.dart';
@@ -508,33 +509,19 @@ class _ProceedPageState extends State<ProceedPage> {
       child: Row(
         children: [
           Expanded(
-            child: RaisedButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4.0),
-                  side: const BorderSide(color: primaryColor)),
-              onPressed: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => LandingPage()),
-                // );
-              },
-              color: Colors.white,
-              textColor: primaryColor,
-              child: Text("CONTINUE SHOPPING".toUpperCase(),
-                  style: const TextStyle(fontSize: 14)),
-            ),
+            child: LibertyFashionButton.outline(
+                buttonText: 'CONTINUE SHOPPING',
+                onPressed: () {},
+                buttonBackgroundColor: Colors.white,
+                buttonTextColor: primaryColor,
+                buttonTextFontSize: 14),
           ),
           const SizedBox(
             width: 5,
           ),
           Expanded(
-            child: FlatButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4.0),
-                  side: const BorderSide(color: Colors.red)),
-              color: primaryColor,
-              textColor: Colors.white,
-              padding: const EdgeInsets.all(8.0),
+            child: LibertyFashionButton(
+              buttonText: mode == "New" ? "ADD TO CART" : "Update",
               onPressed: () {
                 if (collectionName == "Fabric") {
                   addToCart(fabric);
@@ -573,7 +560,6 @@ class _ProceedPageState extends State<ProceedPage> {
                         textColor: Colors.white,
                         fontSize: 16.0);
                   } else {
-                    print("here");
                     addToCart(product);
                     // Navigator.push(
                     //   context,
@@ -584,12 +570,6 @@ class _ProceedPageState extends State<ProceedPage> {
                   }
                 }
               },
-              child: Text(
-                mode == "New" ? "ADD TO CART" : "Update",
-                style: const TextStyle(
-                  fontSize: 14.0,
-                ),
-              ),
             ),
           ),
         ],
@@ -1083,7 +1063,7 @@ class _ProceedPageState extends State<ProceedPage> {
                       )
                     ],
                   ),
-                   const SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   bottom()

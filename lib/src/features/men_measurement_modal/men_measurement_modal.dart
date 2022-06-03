@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:liberty_fashion/src/core/models/models.dart';
 import 'package:liberty_fashion/src/core/utils/utils.dart';
+import 'package:liberty_fashion/src/core/widgets/buttons/liberty_fashion_button.dart';
 import 'package:liberty_fashion/src/core/widgets/input_fields/liberty_fashion_text_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -34,7 +35,6 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
   final TextEditingController _trouserTip = TextEditingController();
 
   final TextEditingController _info = TextEditingController();
-
 
   late String type;
 
@@ -358,20 +358,12 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
                               width: 120,
                               height: 40,
                               decoration: BoxDecoration(
-                                  color: primaryColor,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Center(
-                                child: FlatButton(
-                                  child: const Text(
-                                    "Save",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.white,
-                                      fontFamily: "SegoeUi",
-                                    ),
-                                  ),
-                                  onPressed: validateAndSubmitMenMeasurement,
-                                ),
+                                color: primaryColor,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: LibertyFashionButton(
+                                buttonText: 'Save',
+                                onPressed: validateAndSubmitMenMeasurement,
                               ),
                             ),
                           ),

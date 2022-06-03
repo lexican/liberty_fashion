@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:liberty_fashion/src/core/widgets/buttons/liberty_fashion_button.dart';
 import 'package:liberty_fashion/src/core/widgets/input_fields/liberty_fashion_text_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -663,17 +664,9 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Center(
-                                child: FlatButton(
-                                  //color: Colors.white,
-                                  child: const Text(
-                                    "Save",
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.white,
-                                        fontFamily: "SegoeUi"),
-                                  ),
+                                child: LibertyFashionButton(
+                                  buttonText: 'Save',
                                   onPressed: validateAndSubmitWomenMeasurement,
-                                  //isSubmitting ? null : validateAndSubmit,
                                 ),
                               ),
                             ),
