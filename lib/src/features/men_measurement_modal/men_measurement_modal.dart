@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:liberty_fashion/src/core/models/models.dart';
 import 'package:liberty_fashion/src/core/utils/utils.dart';
+import 'package:liberty_fashion/src/core/widgets/input_fields/liberty_fashion_text_field_with_label.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MenMeasurementModal extends StatefulWidget {
@@ -34,10 +35,10 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
 
   final TextEditingController _info = TextEditingController();
 
-  final TextStyle labelStyle =
-      const TextStyle(color: Colors.black87, fontSize: 16, fontFamily: 'SegoeUi');
-  final textStyle =
-     const TextStyle(color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi');
+  final TextStyle labelStyle = const TextStyle(
+      color: Colors.black87, fontSize: 16, fontFamily: 'SegoeUi');
+  final textStyle = const TextStyle(
+      color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi');
 
   late String type;
   late String info;
@@ -120,22 +121,13 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Shoulder(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextFieldWithLabel(
+                labelText: 'Shoulder(in)',
                 controller: _shoulder,
                 onChanged: (String val) {
                   measurementMen.shoulder = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                style: textStyle,
                 validator: (val) =>
                     isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
@@ -147,22 +139,13 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Sleeve(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextFieldWithLabel(
+                labelText: 'Sleeve(in)',
                 controller: _sleeve,
                 onChanged: (String val) {
                   measurementMen.sleeve = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                style: textStyle,
                 validator: (val) =>
                     isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
@@ -174,22 +157,13 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Chest(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextFieldWithLabel(
+                labelText: 'Chest(in)',
                 controller: _chest,
                 onChanged: (String val) {
                   measurementMen.chest = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                style: textStyle,
                 validator: (val) =>
                     isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
@@ -202,22 +176,13 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Top Length(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextFieldWithLabel(
+                labelText: 'Top Length(in)',
                 controller: _topLength,
                 onChanged: (String val) {
                   measurementMen.topLength = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                style: textStyle,
                 validator: (val) =>
                     isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
@@ -230,22 +195,13 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Bicep(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextFieldWithLabel(
+                labelText: 'Bicep(in)',
                 controller: _bicep,
                 onChanged: (String val) {
                   measurementMen.bicep = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                style: textStyle,
                 validator: (val) =>
                     isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
@@ -258,26 +214,17 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Wrist(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextFieldWithLabel(
+                labelText: 'Wrist(in)',
                 controller: _wrist,
                 onChanged: (String val) {
                   measurementMen.wrist = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                style: textStyle,
                 validator: (val) =>
                     isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
-            )
+            ),
           ],
         ),
       );
@@ -285,26 +232,17 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Waist(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextFieldWithLabel(
+                labelText: 'Waist(in)',
                 controller: _waist,
                 onChanged: (String val) {
                   measurementMen.waist = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                style: textStyle,
                 validator: (val) =>
                     isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
-            )
+            ),
           ],
         ),
       );
@@ -315,49 +253,13 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Trouser Length(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextFieldWithLabel(
+                labelText: 'Trouser Length(in)',
                 controller: _trouserLength,
                 onChanged: (String val) {
                   measurementMen.trouserLength = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                style: textStyle,
-                validator: (val) =>
-                    isNumeric(val ?? "") ? null : "Invalid measurement",
-              ),
-            )
-          ],
-        ),
-      );
-      items.add(
-        Row(
-          children: [
-            Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Thigh(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
-                controller: _thigh,
-                onChanged: (String val) {
-                  measurementMen.thigh = double.parse(val);
-                },
-                keyboardType: TextInputType.number,
-                style: textStyle,
                 validator: (val) =>
                     isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
@@ -369,26 +271,35 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Trouser Tip(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextFieldWithLabel(
+                labelText: 'Thigh(in)',
+                controller: _thigh,
+                onChanged: (String val) {
+                  measurementMen.thigh = double.parse(val);
+                },
+                keyboardType: TextInputType.number,
+                validator: (val) =>
+                    isNumeric(val ?? "") ? null : "Invalid measurement",
+              ),
+            ),
+          ],
+        ),
+      );
+      items.add(
+        Row(
+          children: [
+            Expanded(
+              child: LibertyFashionTextFieldWithLabel(
+                labelText: 'Trouser Tip(in)',
                 controller: _trouserTip,
                 onChanged: (String val) {
                   measurementMen.trouserTip = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                style: textStyle,
                 validator: (val) =>
                     isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
-            )
+            ),
           ],
         ),
       );
@@ -398,26 +309,15 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
       Row(
         children: [
           Expanded(
-            child: TextFormField(
-              keyboardType: TextInputType.multiline,
-              minLines: 2,
-              maxLines: 5,
-              decoration: InputDecoration(
-                labelText: "Additional Information",
-                labelStyle: labelStyle,
-                focusedBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.purple),
-                ),
-                enabledBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-              ),
+            child: LibertyFashionTextFieldWithLabel(
+              labelText: "Additional Information",
               controller: _info,
               onChanged: (String val) {
                 measurementMen.info = val;
               },
-              style: textStyle
+              keyboardType: TextInputType.number,
             ),
-          )
+          ),
         ],
       ),
     );
