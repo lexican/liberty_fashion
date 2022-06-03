@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class LibertyFashionTextFieldWithLabel extends StatelessWidget {
+class LibertyFashionTextField extends StatelessWidget {
   final String? labelText;
   final TextStyle? labelStyle;
   final TextStyle? textStyle;
@@ -8,7 +8,7 @@ class LibertyFashionTextFieldWithLabel extends StatelessWidget {
   final Function(String)? onChanged;
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
-  const LibertyFashionTextFieldWithLabel(
+  const LibertyFashionTextField(
       {Key? key,
       this.labelText,
       this.labelStyle,

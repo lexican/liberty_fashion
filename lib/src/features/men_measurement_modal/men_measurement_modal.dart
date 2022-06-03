@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:liberty_fashion/src/core/models/models.dart';
 import 'package:liberty_fashion/src/core/utils/utils.dart';
-import 'package:liberty_fashion/src/core/widgets/input_fields/liberty_fashion_text_field_with_label.dart';
+import 'package:liberty_fashion/src/core/widgets/input_fields/liberty_fashion_text_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MenMeasurementModal extends StatefulWidget {
@@ -121,7 +121,7 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: LibertyFashionTextFieldWithLabel(
+              child: LibertyFashionTextField(
                 labelText: 'Shoulder(in)',
                 controller: _shoulder,
                 onChanged: (String val) {
@@ -139,7 +139,7 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: LibertyFashionTextFieldWithLabel(
+              child: LibertyFashionTextField(
                 labelText: 'Sleeve(in)',
                 controller: _sleeve,
                 onChanged: (String val) {
@@ -157,7 +157,7 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: LibertyFashionTextFieldWithLabel(
+              child: LibertyFashionTextField(
                 labelText: 'Chest(in)',
                 controller: _chest,
                 onChanged: (String val) {
@@ -176,7 +176,7 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: LibertyFashionTextFieldWithLabel(
+              child: LibertyFashionTextField(
                 labelText: 'Top Length(in)',
                 controller: _topLength,
                 onChanged: (String val) {
@@ -195,7 +195,7 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: LibertyFashionTextFieldWithLabel(
+              child: LibertyFashionTextField(
                 labelText: 'Bicep(in)',
                 controller: _bicep,
                 onChanged: (String val) {
@@ -214,7 +214,7 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: LibertyFashionTextFieldWithLabel(
+              child: LibertyFashionTextField(
                 labelText: 'Wrist(in)',
                 controller: _wrist,
                 onChanged: (String val) {
@@ -232,7 +232,7 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: LibertyFashionTextFieldWithLabel(
+              child: LibertyFashionTextField(
                 labelText: 'Waist(in)',
                 controller: _waist,
                 onChanged: (String val) {
@@ -253,7 +253,7 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: LibertyFashionTextFieldWithLabel(
+              child: LibertyFashionTextField(
                 labelText: 'Trouser Length(in)',
                 controller: _trouserLength,
                 onChanged: (String val) {
@@ -271,7 +271,7 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: LibertyFashionTextFieldWithLabel(
+              child: LibertyFashionTextField(
                 labelText: 'Thigh(in)',
                 controller: _thigh,
                 onChanged: (String val) {
@@ -289,7 +289,7 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: LibertyFashionTextFieldWithLabel(
+              child: LibertyFashionTextField(
                 labelText: 'Trouser Tip(in)',
                 controller: _trouserTip,
                 onChanged: (String val) {
@@ -309,7 +309,7 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
       Row(
         children: [
           Expanded(
-            child: LibertyFashionTextFieldWithLabel(
+            child: LibertyFashionTextField(
               labelText: "Additional Information",
               controller: _info,
               onChanged: (String val) {
