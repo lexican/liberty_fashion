@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:liberty_fashion/src/core/widgets/input_fields/liberty_fashion_text_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/models/models.dart';
@@ -58,11 +59,6 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
   final TextEditingController _skirtKneeLengthWn = TextEditingController();
 
   final TextEditingController _info = TextEditingController();
-
-  final TextStyle labelStyle = const TextStyle(
-      color: Colors.black87, fontSize: 16, fontFamily: 'SegoeUi');
-  final textStyle = const TextStyle(
-      color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi');
 
   late String type;
 
@@ -176,27 +172,15 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Shoulder(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextField(
+                labelText: 'Shoulder(in)',
+                controller: _shoulderWn,
                 onChanged: (String val) {
                   measurementWomen.shoulder = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                // initialValue: measurementWomen.neckCircumference !=
-                //         null
-                //     ? measurementWomen.neckCircumference.toString()
-                //     : "",
-                controller: _shoulderWn,
-                style: const TextStyle(
-                    color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi'),
+                validator: (val) =>
+                    isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
             ),
           ],
@@ -208,59 +192,19 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
         type == "Top" ||
         type == "Dresses" ||
         type == "JumpSuit") {
-      // items.add(
-      //   Row(
-      //     children: [
-      //       Expanded(
-      //         child: TextFormField(
-      //           decoration: InputDecoration(
-      //             labelText: 'Sleeve(in)',
-      //             labelStyle: labelStyle,
-      //             focusedBorder: UnderlineInputBorder(
-      //               borderSide: BorderSide(color: Colors.purple),
-      //             ),
-      //             enabledBorder: new UnderlineInputBorder(
-      //                 borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-      //           ),
-      //           onChanged: (String val) {
-      //             measurementWomen.sleeve = double.parse(val);
-      //           },
-      //           keyboardType: TextInputType.number,
-      //           // initialValue: measurementWomen.outSeam != null
-      //           //     ? measurementWomen.outSeam.toString()
-      //           //     : "",
-      //           controller: _sleeveWn,
-      //           style: TextStyle(
-      //               color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi'),
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // );
       items.add(
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Sleeve Short Length(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextField(
+                labelText: 'Sleeve Short Length(in)',
+                controller: _sleeveshortWn,
                 onChanged: (String val) {
                   measurementWomen.sleeveShortLength = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                // initialValue: measurementWomen.outSeam != null
-                //     ? measurementWomen.outSeam.toString()
-                //     : "",
-                controller: _sleeveshortWn,
-                style: const TextStyle(
-                    color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi'),
+                validator: (val) =>
+                    isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
             ),
           ],
@@ -270,26 +214,15 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Sleeve 3/4 Length(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextField(
+                labelText: 'Sleeve 3/4 Length(in)',
+                controller: _sleeve34Wn,
                 onChanged: (String val) {
                   measurementWomen.sleeve34Length = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                // initialValue: measurementWomen.outSeam != null
-                //     ? measurementWomen.outSeam.toString()
-                //     : "",
-                controller: _sleeve34Wn,
-                style: const TextStyle(
-                    color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi'),
+                validator: (val) =>
+                    isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
             ),
           ],
@@ -299,26 +232,15 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Sleeve Long/Full Length(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextField(
+                labelText: 'Sleeve Long/Full Length(in)',
+                controller: _sleeveLongWn,
                 onChanged: (String val) {
                   measurementWomen.sleeveFullLength = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                // initialValue: measurementWomen.outSeam != null
-                //     ? measurementWomen.outSeam.toString()
-                //     : "",
-                controller: _sleeveLongWn,
-                style: const TextStyle(
-                    color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi'),
+                validator: (val) =>
+                    isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
             ),
           ],
@@ -334,26 +256,15 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Bust(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextField(
+                labelText: 'Bust(in)',
+                controller: _bustWn,
                 onChanged: (String val) {
                   measurementWomen.bust = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                // initialValue: measurementWomen.bust != null
-                //     ? measurementWomen.bust.toString()
-                //     : "",
-                controller: _bustWn,
-                style: const TextStyle(
-                    color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi'),
+                validator: (val) =>
+                    isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
             ),
           ],
@@ -369,28 +280,17 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Bust Point(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextField(
+                labelText: 'Bust Point(in)',
+                controller: _bustPointWn,
                 onChanged: (String val) {
                   measurementWomen.bustPoint = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                controller: _bustPointWn,
-                // initialValue: measurementWomen.shoulderWidth != null
-                //     ? measurementWomen.shoulderWidth.toString()
-                //     : "",
-                style: const TextStyle(
-                    color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi'),
+                validator: (val) =>
+                    isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
-            )
+            ),
           ],
         ),
       );
@@ -404,60 +304,15 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Shoulder To Under Bust(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextField(
+                labelText: 'Shoulder To Under Bust(in)',
+                controller: _shoulderToUnderBustWn,
                 onChanged: (String val) {
                   measurementWomen.shoulderToUnderBust = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                // initialValue: measurementWomen.waist != null
-                //     ? measurementWomen.waist.toString()
-                //     : "",
-                controller: _shoulderToUnderBustWn,
-                style: const TextStyle(
-                    color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi'),
-              ),
-            )
-          ],
-        ),
-      );
-    }
-    if (type == "Regular" ||
-        type == "Top" ||
-        type == "Dresses" ||
-        type == "JumpSuit") {
-      items.add(
-        Row(
-          children: [
-            Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Round Under Bust(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
-                onChanged: (String val) {
-                  measurementWomen.roundUnderBust = double.parse(val);
-                },
-                keyboardType: TextInputType.number,
-                // initialValue: measurementWomen.crotchLength != null
-                //     ? measurementWomen.crotchLength.toString()
-                //     : "",
-                controller: _roundUnderBustWn,
-                style: const TextStyle(
-                    color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi'),
+                validator: (val) =>
+                    isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
             ),
           ],
@@ -472,29 +327,17 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Half Length',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextField(
+                labelText: 'Round Under Bust(in)',
+                controller: _roundUnderBustWn,
                 onChanged: (String val) {
-                  measurementWomen.halfLength = double.parse(val);
+                  measurementWomen.roundUnderBust = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                // initialValue: measurementWomen.hipCircumference !=
-                //         null
-                //     ? measurementWomen.hipCircumference.toString()
-                //     : null,
-                controller: _halfLengthWn,
-                style: const TextStyle(
-                    color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi'),
+                validator: (val) =>
+                    isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
-            )
+            ),
           ],
         ),
       );
@@ -507,27 +350,38 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Blouse Waist(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextField(
+                labelText: 'Half Length',
+                controller: _halfLengthWn,
+                onChanged: (String val) {
+                  measurementWomen.halfLength = double.parse(val);
+                },
+                keyboardType: TextInputType.number,
+                validator: (val) =>
+                    isNumeric(val ?? "") ? null : "Invalid measurement",
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+    if (type == "Regular" ||
+        type == "Top" ||
+        type == "Dresses" ||
+        type == "JumpSuit") {
+      items.add(
+        Row(
+          children: [
+            Expanded(
+              child: LibertyFashionTextField(
+                labelText: 'Blouse Waist(in)',
+                controller: _blouseWaistWn,
                 onChanged: (String val) {
                   measurementWomen.blouseWaist = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                // initialValue: measurementWomen.centerBackLength !=
-                //         null
-                //     ? measurementWomen.centerBackLength.toString()
-                //     : "",
-                controller: _blouseWaistWn,
-                style: const TextStyle(
-                    color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi'),
+                validator: (val) =>
+                    isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
             ),
           ],
@@ -539,26 +393,15 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Blouse Length(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextField(
+                labelText: 'Blouse Length(in)',
+                controller: _blouseLengthWn,
                 onChanged: (String val) {
                   measurementWomen.blouseLength = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                // initialValue: measurementWomen.inSeam != null
-                //     ? measurementWomen.inSeam.toString()
-                //     : "",
-                controller: _blouseLengthWn,
-                style: const TextStyle(
-                    color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi'),
+                validator: (val) =>
+                    isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
             ),
           ],
@@ -571,26 +414,15 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Skirt Waist(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextField(
+                labelText: 'Skirt Waist(in)',
+                controller: _skirtWaistWn,
                 onChanged: (String val) {
                   measurementWomen.skirtWaist = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                // initialValue: measurementWomen.armLength != null
-                //     ? measurementWomen.armLength.toString()
-                //     : "",
-                controller: _skirtWaistWn,
-                style: const TextStyle(
-                    color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi'),
+                validator: (val) =>
+                    isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
             ),
           ],
@@ -602,26 +434,15 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Hips(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextField(
+                labelText: 'Hips(in)',
+                controller: _hipsWn,
                 onChanged: (String val) {
                   measurementWomen.hips = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                // initialValue: measurementWomen.inSeam != null
-                //     ? measurementWomen.inSeam.toString()
-                //     : "",
-                controller: _hipsWn,
-                style: const TextStyle(
-                    color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi'),
+                validator: (val) =>
+                    isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
             ),
           ],
@@ -630,60 +451,19 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
     }
 
     if (type == "Regular" || type == "Dresses" || type == "JumpSuit") {
-      // items.add(
-      //   Row(
-      //     children: [
-      //       Expanded(
-      //         child: TextFormField(
-      //           decoration: InputDecoration(
-      //             labelText: 'Dress Length(in)',
-      //             labelStyle: labelStyle,
-      //             focusedBorder: UnderlineInputBorder(
-      //               borderSide: BorderSide(color: Colors.purple),
-      //             ),
-      //             enabledBorder: new UnderlineInputBorder(
-      //                 borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-      //           ),
-      //           onChanged: (String val) {
-      //             measurementWomen.dressLength = double.parse(val);
-      //           },
-      //           keyboardType: TextInputType.number,
-      //           // initialValue: measurementWomen.inSeam != null
-      //           //     ? measurementWomen.inSeam.toString()
-      //           //     : "",
-      //           controller: _dressLengthWn,
-      //           style: TextStyle(
-      //               color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi'),
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // );
-
       items.add(
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Dress Half Length(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextField(
+                labelText: 'Dress Half Length(in)',
+                controller: _dress12LengthWn,
                 onChanged: (String val) {
                   measurementWomen.dressHalfLength = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                // initialValue: measurementWomen.inSeam != null
-                //     ? measurementWomen.inSeam.toString()
-                //     : "",
-                controller: _dress12LengthWn,
-                style: const TextStyle(
-                    color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi'),
+                validator: (val) =>
+                    isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
             ),
           ],
@@ -693,26 +473,15 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Dress Knee Length(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextField(
+                labelText: 'Dress Knee Length(in)',
+                controller: _dresskneeLengthWn,
                 onChanged: (String val) {
                   measurementWomen.dressKneeLength = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                // initialValue: measurementWomen.inSeam != null
-                //     ? measurementWomen.inSeam.toString()
-                //     : "",
-                controller: _dresskneeLengthWn,
-                style: const TextStyle(
-                    color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi'),
+                validator: (val) =>
+                    isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
             ),
           ],
@@ -722,26 +491,15 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Dress 3/4 Length(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextField(
+                labelText: 'Dress 3/4 Length(in)',
+                controller: _dress34LengthWn,
                 onChanged: (String val) {
                   measurementWomen.dress34Length = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                // initialValue: measurementWomen.inSeam != null
-                //     ? measurementWomen.inSeam.toString()
-                //     : "",
-                controller: _dress34LengthWn,
-                style: const TextStyle(
-                    color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi'),
+                validator: (val) =>
+                    isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
             ),
           ],
@@ -751,26 +509,15 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Dress Floor Length(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextField(
+                labelText: 'Dress Floor Length(in)',
+                controller: _dressfloorLengthWn,
                 onChanged: (String val) {
                   measurementWomen.dressFloorLength = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                // initialValue: measurementWomen.inSeam != null
-                //     ? measurementWomen.inSeam.toString()
-                //     : "",
-                controller: _dressfloorLengthWn,
-                style: const TextStyle(
-                    color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi'),
+                validator: (val) =>
+                    isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
             ),
           ],
@@ -778,59 +525,19 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
       );
     }
     if (type == "Regular" || type == "Skirt") {
-      // items.add(
-      //   Row(
-      //     children: [
-      //       Expanded(
-      //         child: TextFormField(
-      //           decoration: InputDecoration(
-      //             labelText: 'Skirt Length(in)',
-      //             labelStyle: labelStyle,
-      //             focusedBorder: UnderlineInputBorder(
-      //               borderSide: BorderSide(color: Colors.purple),
-      //             ),
-      //             enabledBorder: new UnderlineInputBorder(
-      //                 borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-      //           ),
-      //           onChanged: (String val) {
-      //             measurementWomen.skirtLength = double.parse(val);
-      //           },
-      //           keyboardType: TextInputType.number,
-      //           // initialValue: measurementWomen.outSeam != null
-      //           //     ? measurementWomen.outSeam.toString()
-      //           //     : "",
-      //           controller: _skirtLengthWn,
-      //           style: TextStyle(
-      //               color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi'),
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // );
       items.add(
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Skirt Short Length(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextField(
+                labelText: 'Skirt Short Length(in)',
+                controller: _skirtLongLengthWn,
                 onChanged: (String val) {
                   measurementWomen.skirtShortLength = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                // initialValue: measurementWomen.outSeam != null
-                //     ? measurementWomen.outSeam.toString()
-                //     : "",
-                controller: _skirtLongLengthWn,
-                style: const TextStyle(
-                    color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi'),
+                validator: (val) =>
+                    isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
             ),
           ],
@@ -840,26 +547,15 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Skirt Knee Length(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextField(
+                labelText: 'Skirt Knee Length(in)',
+                controller: _skirtKneeLengthWn,
                 onChanged: (String val) {
                   measurementWomen.skirtKneeLength = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                // initialValue: measurementWomen.outSeam != null
-                //     ? measurementWomen.outSeam.toString()
-                //     : "",
-                controller: _skirtKneeLengthWn,
-                style: const TextStyle(
-                    color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi'),
+                validator: (val) =>
+                    isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
             ),
           ],
@@ -869,26 +565,15 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Skirt 3/4 Length(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextField(
+                labelText: 'Skirt 3/4 Length(in)',
+                controller: _skirt34LengthWn,
                 onChanged: (String val) {
                   measurementWomen.skirt34Length = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                // initialValue: measurementWomen.outSeam != null
-                //     ? measurementWomen.outSeam.toString()
-                //     : "",
-                controller: _skirt34LengthWn,
-                style: const TextStyle(
-                    color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi'),
+                validator: (val) =>
+                    isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
             ),
           ],
@@ -898,26 +583,15 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Skirt Long Length(in)',
-                  labelStyle: labelStyle,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                ),
+              child: LibertyFashionTextField(
+                labelText: 'Skirt Long Length(in)',
+                controller: _skirtLongLengthWn,
                 onChanged: (String val) {
                   measurementWomen.skirtFloorLength = double.parse(val);
                 },
                 keyboardType: TextInputType.number,
-                // initialValue: measurementWomen.outSeam != null
-                //     ? measurementWomen.outSeam.toString()
-                //     : "",
-                controller: _skirtLongLengthWn,
-                style: const TextStyle(
-                    color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi'),
+                validator: (val) =>
+                    isNumeric(val ?? "") ? null : "Invalid measurement",
               ),
             ),
           ],
@@ -928,26 +602,15 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
       Row(
         children: [
           Expanded(
-            child: TextFormField(
-              keyboardType: TextInputType.multiline,
-              minLines: 2,
-              maxLines: 5,
-              decoration: InputDecoration(
-                labelText: "Additional Information",
-                labelStyle: labelStyle,
-                focusedBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.purple),
-                ),
-                enabledBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-              ),
-              controller: _info,
+            child: LibertyFashionTextField(
+              labelText: "Additional Information",
+              controller: _skirtLongLengthWn,
               onChanged: (String val) {
                 measurementWomen.info = val;
               },
-              style: textStyle,
+              keyboardType: TextInputType.number,
             ),
-          )
+          ),
         ],
       ),
     );
@@ -979,13 +642,10 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-
                         const SizedBox(
                           width: 10,
                         ),
-
                         ...items,
-
                         const SizedBox(
                           height: 20,
                         ),
