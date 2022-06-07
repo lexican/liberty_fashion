@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:liberty_fashion/src/features/tab_view/tab_view.dart';
 
 class LibertyFashionApp extends StatefulWidget {
@@ -20,12 +21,15 @@ class _LibertyFashionAppState extends State<LibertyFashionApp> {
         if (snapshot.hasData) {
           return ScreenUtilInit(
             designSize: const Size(375, 812),
-            builder: (_, __) => MaterialApp(
-              title: 'Liberty Fashion App',
-              theme: ThemeData(
-                primarySwatch: Colors.blue,
+            builder: (_, __) => KeyboardDismisser(
+              gestures: const [GestureType.onTap],
+              child: MaterialApp(
+                title: 'Liberty Fashion App',
+                theme: ThemeData(
+                  primarySwatch: Colors.blue,
+                ),
+                home: const TabView(),
               ),
-              home: const TabView(),
             ),
           );
         }
