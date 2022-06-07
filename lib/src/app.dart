@@ -2,7 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
+import 'package:liberty_fashion/src/core/services/analytics_service/analytics_service.dart';
 import 'package:liberty_fashion/src/features/tab_view/tab_view.dart';
+
+import 'core/services/locator/locator.dart';
 
 class LibertyFashionApp extends StatefulWidget {
   const LibertyFashionApp({Key? key}) : super(key: key);
@@ -29,6 +32,9 @@ class _LibertyFashionAppState extends State<LibertyFashionApp> {
                   primarySwatch: Colors.blue,
                 ),
                 home: const TabView(),
+                navigatorObservers: <NavigatorObserver>[
+                  locator<AnalyticsServiceImpl>().firebaseAnalyticsObserver,
+                ],
               ),
             ),
           );

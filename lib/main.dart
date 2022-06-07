@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:liberty_fashion/src/app.dart';
+import 'package:liberty_fashion/src/core/services/locator/locator.dart';
 import 'package:liberty_fashion/src/features/tab_view/tab_view.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  setupLocator();
   runApp(const LibertyFashionApp());
 }
 
