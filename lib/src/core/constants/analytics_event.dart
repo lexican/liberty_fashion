@@ -1,3 +1,3 @@
 class AnalyticsEvent {
-  static String home = home;
+  static const home = 'Home';
 }

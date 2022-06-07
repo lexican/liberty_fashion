@@ -5,6 +5,8 @@ import 'package:liberty_fashion/src/core/services/locator/locator.dart';
 import 'package:liberty_fashion/src/core/utils/utils.dart';
 import 'package:liberty_fashion/src/features/home/home.dart';
 
+import '../../core/constants/constants.dart';
+
 class TabView extends StatefulWidget {
   const TabView({Key? key}) : super(key: key);
 
@@ -26,6 +28,16 @@ class _TabViewState extends State<TabView> with RouteAware {
     setState(() {
       _currentTabIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    hh();
+  }
+
+  void hh() async {
+    await _analytics.logEvent(eventName: AnalyticsEvent.home);
   }
 
   @override
