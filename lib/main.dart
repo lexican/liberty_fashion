@@ -1,11 +1,10 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:liberty_fashion/src/app.dart';
 import 'package:liberty_fashion/src/features/tab_view/tab_view.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(const LibertyFashionApp());
 }
 
 class MyApp extends StatelessWidget {
