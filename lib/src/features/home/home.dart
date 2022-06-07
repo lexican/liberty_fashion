@@ -1,6 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:liberty_fashion/src/core/api/api.dart';
+import 'package:liberty_fashion/src/core/models/models.dart';
 import 'package:liberty_fashion/src/core/utils/utils.dart';
-import 'package:liberty_fashion/src/features/collection_category/collection_category.dart';
+import 'package:liberty_fashion/src/core/widgets/collection_category_card.dart';
+import 'package:liberty_fashion/src/features/products/products.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -10,49 +14,121 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int _selectedIndex = 0;
-  static final List<Widget> _widgetOptions = <Widget>[
-    const CollectionCategory(),
-    Container(),
-    Container()
-  ];
+  CollectionsCategoryApi collectionsCategoryApi = CollectionsCategoryApi();
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void navigateToCollectionPage(collectionCategory) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Products(
+          collectionCategory: collectionCategory,
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 2;
+    final double itemWidth = size.width / 2;
     return Scaffold(
-      body: _widgetOptions.elementAt(_selectedIndex),
-      bottomNavigationBar: SizedBox(
-        height: 58,
-        child: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: "Home",
-              //title: Text('Home'),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        title: const Text(
+          "Fashion App",
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(
+              Icons.shopping_cart,
+              color: primaryColor,
             ),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.collections), label: "Gallery"
-                //title: Text('Business'),
+            onPressed: () {
+              // Navigator.push(
+              //     context, MaterialPageRoute(builder: (context) => CartPage()));
+            },
+          ),
+          const SizedBox(
+            width: 20,
+          )
+        ],
+        leading: const Icon(
+          Icons.ac_unit,
+          color: primaryColor,
+        ),
+      ),
+      body: SizedBox(
+        height: size.height,
+        width: size.width,
+        child: ListView(
+          children: [
+            Container(
+              width: size.width,
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+              child: const Align(
+                alignment: Alignment.bottomLeft,
+                child: Text(
+                  "Explore collection",
+                  style: TextStyle(fontSize: 18, fontFamily: "SegoeUi"),
+                  textAlign: TextAlign.left,
                 ),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle), label: "Profile"
-                //title: Text('Profile'),
-                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: StreamBuilder(
+                stream: collectionsCategoryApi.streamDataCollection(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasData) {
+                    if (snapshot.data != null) {
+                      List<CollectionCategoryModel> list =
+                          snapshot.data!.docs.map((DocumentSnapshot doc) {
+                        return CollectionCategoryModel.fromSnapshot(doc);
+                      }).toList();
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: GridView.count(
+                          childAspectRatio: (itemWidth / itemHeight),
+                          controller: ScrollController(keepScrollOffset: false),
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                          primary: false,
+                          children: list.reversed
+                              .map(
+                                (item) => CollectionCategoryCard(
+                                  item: item,
+                                  onTap: navigateToCollectionPage,
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      );
+                    }
+                  } else {
+                    return const SizedBox(
+                      height: 100,
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  }
+                  return const SizedBox();
+                },
+              ),
+            )
           ],
-          currentIndex: _selectedIndex,
-          selectedItemColor: primaryColor,
-          onTap: _onItemTapped,
-          backgroundColor: Colors.white,
-          type: BottomNavigationBarType.fixed,
-          showSelectedLabels: true,
-          showUnselectedLabels: true,
-          unselectedItemColor: Colors.black,
         ),
       ),
     );

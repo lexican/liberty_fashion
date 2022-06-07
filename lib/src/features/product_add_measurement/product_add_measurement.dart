@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -55,7 +56,8 @@ class _ProceedPageState extends State<ProceedPage> {
   MenMeasurementModel measurementMen = MenMeasurementModel();
   WomenMeasurementModel measurementWomen = WomenMeasurementModel();
 
-  ProductModel fabric = ProductModel();
+  ProductModel fabric =
+      ProductModel(createDate: DateTime.now().millisecondsSinceEpoch);
 
   final TextEditingController _numberOfYardsCL = TextEditingController();
 
@@ -401,7 +403,7 @@ class _ProceedPageState extends State<ProceedPage> {
                   width: 85,
                   height: 120,
                   child: CachedNetworkImage(
-                    imageUrl: product.productImageUrl,
+                    imageUrl: product.productImageUrl ?? '',
                     fit: BoxFit.cover,
                     placeholder: (context, url) => const SizedBox(
                       width: 85,

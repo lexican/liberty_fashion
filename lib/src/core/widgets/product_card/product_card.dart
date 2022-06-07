@@ -35,7 +35,7 @@ class ProductCard extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
               child: CachedNetworkImage(
-                imageUrl: product.productImageUrl,
+                imageUrl: product.productImageUrl ?? '',
                 width: MediaQuery.of(context).size.width * 0.5,
                 fit: BoxFit.cover,
                 placeholder: (context, url) => const SizedBox(

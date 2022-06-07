@@ -2,17 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductModel {
   ProductModel(
-      { this.collectionCategoryId,
-       this.createDate,
-       this.description,
-       this.id,
-       this.name,
-       this.shortDescription,
-       this.productImageUrl,
+      {this.collectionCategoryId,
+      this.createDate = -1,
+      this.description,
+      this.id,
+      this.name,
+      this.shortDescription,
+      this.productImageUrl,
       this.price});
 
   dynamic collectionCategoryId;
-  dynamic createDate;
+  int? createDate;
   String? description;
   String? id;
   String? name;
@@ -24,7 +24,7 @@ class ProductModel {
     Map? getDocs = doc.data() as Map?;
     return ProductModel(
       collectionCategoryId: getDocs!['collectionCategoryId'],
-      createDate: getDocs['createDate'],
+      createDate: -1,
       description: getDocs['description'],
       id: doc.id,
       name: getDocs['name'],
@@ -36,7 +36,7 @@ class ProductModel {
 
   Map<String, dynamic> toJson() => {
         "collectionCategoryId": collectionCategoryId,
-        "createDate": createDate.toIso8601String(),
+        "createDate": createDate,
         "description": description,
         "id": id,
         "name": name,

@@ -45,7 +45,7 @@ class _FabricCardState extends State<FabricCard> {
                 child: CachedNetworkImage(
                   height: 120,
                   fit: BoxFit.cover,
-                  imageUrl: product.productImageUrl,
+                  imageUrl: product.productImageUrl ?? '',
                   placeholder: (context, url) => const SizedBox(
                     height: 120,
                     child: Center(

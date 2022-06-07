@@ -89,10 +89,11 @@ class _ProductsState extends State<Products> {
                     snapshot.data!.docs.map((DocumentSnapshot doc) {
                   return ProductModel.fromSnapshot(doc);
                 }).toList();
+
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: StaggeredGridView.countBuilder(
-                    shrinkWrap: true,
+                    shrinkWrap: false,
                     crossAxisCount: 4,
                     itemCount: collections.length,
                     controller: ScrollController(keepScrollOffset: false),
@@ -100,7 +101,7 @@ class _ProductsState extends State<Products> {
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                     primary: false,
-                    itemBuilder: (BuildContext context, int index) {
+                    itemBuilder: (_, int index) {
                       return ProductCard(
                         product: collections[index],
                         title: "",
