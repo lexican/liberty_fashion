@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:logger/logger.dart';
 
 const constpadding = EdgeInsets.only(left: 30, right: 30);
@@ -61,6 +62,17 @@ String validatePhoneNumber(String value) {
   } else {
     return '';
   }
+}
+
+void showToast(String message, {Color? backgroundColor}) {
+  Fluttertoast.showToast(
+      msg: "No Fabric selected",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 1,
+      backgroundColor: backgroundColor ?? Colors.black,
+      textColor: Colors.white,
+      fontSize: 16.0);
 }
 
 final logger = Logger(

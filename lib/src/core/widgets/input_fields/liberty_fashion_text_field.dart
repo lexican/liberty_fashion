@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class LibertyFashionTextField extends StatelessWidget {
   final String? labelText;
@@ -8,7 +9,8 @@ class LibertyFashionTextField extends StatelessWidget {
   final Function(String)? onChanged;
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
-  const LibertyFashionTextField(
+  final List<TextInputFormatter>? inputFormatters;
+   const LibertyFashionTextField(
       {Key? key,
       this.labelText,
       this.labelStyle,
@@ -16,7 +18,7 @@ class LibertyFashionTextField extends StatelessWidget {
       this.textStyle,
       this.onChanged,
       this.keyboardType,
-      this.validator})
+      this.validator, this.inputFormatters})
       : super(key: key);
 
   @override
@@ -33,6 +35,7 @@ class LibertyFashionTextField extends StatelessWidget {
         enabledBorder: const UnderlineInputBorder(
             borderSide: BorderSide(color: Colors.grey, width: 1.0)),
       ),
+      inputFormatters: inputFormatters,
       controller: controller,
       onChanged: onChanged,
       keyboardType: keyboardType ?? TextInputType.text,

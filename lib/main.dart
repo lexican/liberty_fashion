@@ -1,29 +1,29 @@
+import 'dart:async';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:liberty_fashion/src/app.dart';
 import 'package:liberty_fashion/src/core/services/locator/locator.dart';
 import 'package:liberty_fashion/src/features/tab_view/tab_view.dart';
 
-Future<void> main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
-  runApp(const LibertyFashionApp());
+
+  runZonedGuarded<Future<void>>(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+
+    runApp(const LibertyFashionApp());
+  },
+      (error, stack) =>
+          FirebaseCrashlytics.instance.recordError(error, stack, fatal: true));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Liberty Fashion App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const TabView(),
-    );
-  }
-}
 
 //  return BlocProvider(
 //               blocs: [

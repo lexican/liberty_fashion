@@ -1,24 +1,24 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:liberty_fashion/src/core/models/models.dart';
 import 'package:liberty_fashion/src/core/utils/utils.dart';
-import 'package:liberty_fashion/src/core/widgets/buttons/liberty_fashion_button.dart';
 import 'package:liberty_fashion/src/core/widgets/decimal_text_input_formatter/decimal_text_input_formatter.dart';
+import 'package:liberty_fashion/src/core/widgets/input_fields/liberty_fashion_text_field.dart';
 import 'package:liberty_fashion/src/core/widgets/modals/floating_modal.dart';
 import 'package:liberty_fashion/src/features/fabric_list/fabric_list.dart';
 import 'package:liberty_fashion/src/features/men_measurement_modal/men_measurement_modal.dart';
 import 'package:liberty_fashion/src/features/men_measurement_view/men_measurement_view.dart';
+import 'package:liberty_fashion/src/features/product_add_measurement/disclaimer_view/disclaimer_view.dart';
+import 'package:liberty_fashion/src/features/product_add_measurement/product_measurement_actions_button/product_measurement_actions_button.dart';
 import 'package:liberty_fashion/src/features/women_measurement_modal/woman_measurement_modal.dart';
 import 'package:liberty_fashion/src/features/women_measurement_view/women_measurement_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
-var uuid = Uuid();
+var uuid = const Uuid();
 
 class ProceedPage extends StatefulWidget {
   final ProductModel product;
@@ -61,7 +61,7 @@ class _ProceedPageState extends State<ProceedPage> {
 
   final TextEditingController _numberOfYardsCL = TextEditingController();
 
-  double numberOfYards = 0;
+  double numberOfYards = 4.0;
 
   TextStyle headingStyle = const TextStyle(
       fontFamily: "Roboto", fontSize: 18, color: Color(0xFF000000));
@@ -70,9 +70,7 @@ class _ProceedPageState extends State<ProceedPage> {
   void initState() {
     product = widget.product;
     collectionName = widget.collectionName;
-
-    print("collectionName: " + collectionName);
-
+    //print("collectionName: " + collectionName);
     mode = widget.mode;
     if (widget.cart != null) {
       cart = widget.cart!;
@@ -80,7 +78,7 @@ class _ProceedPageState extends State<ProceedPage> {
 
     gender = "Male";
 
-    _numberOfYardsCL.text = 4.0.toString();
+    _numberOfYardsCL.text = numberOfYards.toString();
 
     if (mode == "New") {
       if (widget.collectionName == "Children") {
@@ -89,6 +87,12 @@ class _ProceedPageState extends State<ProceedPage> {
       if (widget.collectionName == "Women") {
         setState(() {
           gender = "Female";
+        });
+      }
+
+      if (widget.collectionName == "Fabrics") {
+        setState(() {
+          fabric = product;
         });
       }
 
@@ -153,15 +157,12 @@ class _ProceedPageState extends State<ProceedPage> {
       if (prefs.getString("measurementMen") != null) {
         Map<String, dynamic> item =
             json.decode(prefs.getString("measurementMen") ?? "");
-        //print("item: ${item}");
         measurementMen.shoulder = item['shoulder'];
         measurementMen.sleeve = item['sleeve'];
         measurementMen.chest = item['chest'];
         measurementMen.topLength = item['topLength'];
-
         measurementMen.bicep = item['bicep'];
         measurementMen.wrist = item['wrist'];
-
         measurementMen.hip = item['hip'];
         measurementMen.trouserLength = item['trouserLength'];
         measurementMen.thigh = item['thigh'];
@@ -178,39 +179,29 @@ class _ProceedPageState extends State<ProceedPage> {
         Map<String, dynamic> item =
             json.decode(prefs.getString("measurementWomen") ?? "");
         measurementWomen.shoulder = item['shoulder'];
-
         measurementWomen.sleeve = item['sleeve'];
-
         measurementWomen.sleeveShortLength = item['sleeveShortLength'];
         measurementWomen.sleeve34Length = item['sleeve34Length'];
         measurementWomen.sleeveFullLength = item['sleeveFullLength'];
-
         measurementWomen.bust = item['bust'];
         measurementWomen.bustPoint = item['bustPoint'];
-
         measurementWomen.shoulderToUnderBust = item['shoulderToUnderBust'];
         measurementWomen.roundUnderBust = item['roundUnderBust'];
         measurementWomen.halfLength = item['halfLength'];
         measurementWomen.blouseWaist = item['blouseWaist'];
         measurementWomen.blouseLength = item['blouseLength'];
-
         measurementWomen.skirtWaist = item['skirtWaist'];
         measurementWomen.hips = item['hips'];
-
         measurementWomen.dressLength = item['dressLength'];
-
         measurementWomen.dress34Length = item['dress34Length'];
         measurementWomen.dressKneeLength = item['dressKneeLength'];
         measurementWomen.dressHalfLength = item['dressHalfLength'];
         measurementWomen.dressFloorLength = item['dressFloorLength'];
-
         measurementWomen.skirtLength = item['skirtLength'];
-
         measurementWomen.skirt34Length = item['skirt34Length'];
         measurementWomen.skirtKneeLength = item['skirtKneeLength'];
         measurementWomen.skirtShortLength = item['skirtShortLength'];
         measurementWomen.skirtFloorLength = item['skirtFloorLength'];
-
         measurementWomen.info = item['info'];
       }
     });
@@ -240,26 +231,14 @@ class _ProceedPageState extends State<ProceedPage> {
       });
     }
 
-    // if (collectionName == "Fabrics") {
-    //   setState(() {
-    //     fabric.id = cart.fabricId;
-    //     fabric.name = cart.fabricName;
-    //     fabric.price = cart.fabricPrice;
-    //     fabric.url = "";
-    //   });
-    // }
-
     if (cart.menMeasurement != null) {
       measurementMen.shoulder = cart.menMeasurement?.shoulder ?? 0.0;
       measurementMen.sleeve = cart.menMeasurement?.sleeve ?? 0.0;
       measurementMen.chest = cart.menMeasurement?.chest ?? 0.0;
       measurementMen.topLength = cart.menMeasurement?.topLength ?? 0.0;
-
       measurementMen.bicep = cart.menMeasurement?.bicep ?? 0.0;
       measurementMen.wrist = cart.menMeasurement?.wrist ?? 0.0;
-
       measurementMen.hip = cart.menMeasurement?.hip ?? 0.0;
-
       measurementMen.trouserLength = cart.menMeasurement?.trouserLength ?? 0.0;
       measurementMen.thigh = cart.menMeasurement?.thigh ?? 0.0;
       measurementMen.trouserTip = cart.menMeasurement?.trouserTip ?? 0.0;
@@ -268,7 +247,6 @@ class _ProceedPageState extends State<ProceedPage> {
       measurementWomen.sleeve = cart.womenMeasurement?.sleeve ?? 0.0;
       measurementWomen.bust = cart.womenMeasurement?.bust ?? 0.0;
       measurementWomen.bustPoint = cart.womenMeasurement?.bustPoint ?? 0.0;
-
       measurementWomen.shoulderToUnderBust =
           cart.womenMeasurement?.shoulderToUnderBust ?? 0.0;
       measurementWomen.roundUnderBust =
@@ -277,16 +255,14 @@ class _ProceedPageState extends State<ProceedPage> {
       measurementWomen.blouseWaist = cart.womenMeasurement?.blouseLength ?? 0.0;
       measurementWomen.blouseLength =
           cart.womenMeasurement?.blouseLength ?? 0.0;
-
       measurementWomen.skirtWaist = cart.womenMeasurement?.skirtLength ?? 0.0;
       measurementWomen.hips = cart.womenMeasurement?.hips ?? 0.0;
-
       measurementWomen.dressLength = cart.womenMeasurement?.dressLength ?? 0.0;
       measurementWomen.skirtLength = cart.womenMeasurement?.skirtLength ?? 0.0;
     }
   }
 
-  late File _image;
+  File? _image;
   //final picker = ImagePicker();
 
   void addToCart(
@@ -325,15 +301,6 @@ class _ProceedPageState extends State<ProceedPage> {
     }
   }
 
-  TextStyle meansurementStyle = const TextStyle(
-      fontFamily: "SegoeUi", fontSize: 14, fontWeight: FontWeight.w600);
-
-  // TextStyle headingStyle = TextStyle(
-  //     color: Colors.black,
-  //     fontSize: 16,
-  //     fontFamily: 'Roboto',
-  //     fontWeight: FontWeight.w500);
-
   void pushToNewScreen(BuildContext context) {
     Navigator.push(
       context,
@@ -354,37 +321,37 @@ class _ProceedPageState extends State<ProceedPage> {
     });
   }
 
-  void _showPicker(context) {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext bc) {
-        return SafeArea(
-          child: SizedBox(
-            child: Wrap(
-              children: <Widget>[
-                ListTile(
-                  leading: const Icon(Icons.photo_library),
-                  title: const Text('Photo Library'),
-                  onTap: () {
-                    getImage("Gallery");
-                    Navigator.of(context).pop();
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(Icons.photo_camera),
-                  title: const Text('Camera'),
-                  onTap: () {
-                    getImage("Camera");
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
+  // void _showPicker(context) {
+  //   showModalBottomSheet(
+  //     context: context,
+  //     builder: (BuildContext bc) {
+  //       return SafeArea(
+  //         child: SizedBox(
+  //           child: Wrap(
+  //             children: <Widget>[
+  //               ListTile(
+  //                 leading: const Icon(Icons.photo_library),
+  //                 title: const Text('Photo Library'),
+  //                 onTap: () {
+  //                   getImage("Gallery");
+  //                   Navigator.of(context).pop();
+  //                 },
+  //               ),
+  //               ListTile(
+  //                 leading: const Icon(Icons.photo_camera),
+  //                 title: const Text('Camera'),
+  //                 onTap: () {
+  //                   getImage("Camera");
+  //                   Navigator.of(context).pop();
+  //                 },
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  //}
 
   Widget cartItem() {
     String productName = product.name ?? "";
@@ -505,80 +472,6 @@ class _ProceedPageState extends State<ProceedPage> {
     );
   }
 
-  Widget bottom() {
-    return Container(
-      margin: const EdgeInsets.only(top: 6, bottom: 20),
-      child: Row(
-        children: [
-          Expanded(
-            child: LibertyFashionButton.outline(
-                buttonText: 'CONTINUE SHOPPING',
-                onPressed: () {},
-                buttonBackgroundColor: Colors.white,
-                buttonTextColor: primaryColor,
-                buttonTextFontSize: 14),
-          ),
-          const SizedBox(
-            width: 5,
-          ),
-          Expanded(
-            child: LibertyFashionButton(
-              buttonText: mode == "New" ? "ADD TO CART" : "Update",
-              onPressed: () {
-                if (collectionName == "Fabric") {
-                  addToCart(fabric);
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => CartPage(),
-                  //   ),
-                  // );
-                } else {
-                  if (fabric.name == null) {
-                    Fluttertoast.showToast(
-                        msg: "No Fabric selected",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16.0);
-                  } else if (numberOfYards > 12) {
-                    Fluttertoast.showToast(
-                        msg: "Maximun number of yards is 12",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16.0);
-                  } else if (numberOfYards < 4) {
-                    Fluttertoast.showToast(
-                        msg: "Minimun number of yards is 4",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16.0);
-                  } else {
-                    addToCart(product);
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => CartPage(),
-                    //   ),
-                    // );
-                  }
-                }
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   void setSelectedGender(value) {
     if (value != gender) {
       setState(() {
@@ -620,7 +513,6 @@ class _ProceedPageState extends State<ProceedPage> {
     items.add(Container(
       color: Colors.white,
       padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10, top: 10),
-      //padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -636,31 +528,28 @@ class _ProceedPageState extends State<ProceedPage> {
         ],
       ),
     ));
-    items.add(Container(
-      padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
-      color: Colors.white,
-      child: TextFormField(
-        decoration: const InputDecoration(
+    items.add(
+      Container(
+        padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+        color: Colors.white,
+        child: LibertyFashionTextField(
+          controller: _numberOfYardsCL,
           labelText: 'Number of Yards(Min 4, Max 12)',
-          labelStyle: TextStyle(
+          labelStyle: const TextStyle(
               color: Colors.black87, fontSize: 18, fontFamily: 'SegoeUi'),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.purple),
-          ),
-          enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey, width: 1.0)),
+          onChanged: (String val) {
+            try {
+              numberOfYards = double.parse(val);
+            } catch (e) {
+              logger.e(e);
+            }
+          },
+          inputFormatters: [DecimalTextInputFormatter(decimalRange: 1)],
+          textStyle: const TextStyle(
+              color: Colors.black87, fontSize: 16, fontFamily: 'SegoeUi'),
         ),
-        onChanged: (String val) {
-          numberOfYards = double.parse(val);
-        },
-        inputFormatters: [DecimalTextInputFormatter(decimalRange: 1)],
-        keyboardType: const TextInputType.numberWithOptions(decimal: true),
-        //initialValue: numberOfYards.toString(),
-        controller: _numberOfYardsCL,
-        style: const TextStyle(
-            color: Colors.black87, fontSize: 16, fontFamily: 'SegoeUi'),
       ),
-    ));
+    );
     return items;
   }
 
@@ -764,19 +653,18 @@ class _ProceedPageState extends State<ProceedPage> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         _image == null
-                                            ? Container(
-                                                child: SvgPicture.asset(
-                                                    "assets/images/fabric.svg",
-                                                    color: Colors.red,
-                                                    semanticsLabel:
-                                                        'A red up arrow'))
+                                            ? SvgPicture.asset(
+                                                "assets/images/fabric.svg",
+                                                color: Colors.red,
+                                                semanticsLabel:
+                                                    'A red up arrow')
                                             : CircleAvatar(
                                                 radius: 20,
                                                 child: ClipRRect(
                                                   borderRadius:
                                                       BorderRadius.circular(20),
                                                   child: Image.file(
-                                                    _image,
+                                                    _image!,
                                                     width: 40,
                                                     height: 40,
                                                     fit: BoxFit.fitHeight,
@@ -832,12 +720,10 @@ class _ProceedPageState extends State<ProceedPage> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Container(
-                                            child: SvgPicture.asset(
-                                                "assets/images/fabric.svg",
-                                                color: Colors.red,
-                                                semanticsLabel:
-                                                    'A red up arrow')),
+                                        SvgPicture.asset(
+                                            "assets/images/fabric.svg",
+                                            color: Colors.red,
+                                            semanticsLabel: 'A red up arrow'),
                                         const SizedBox(
                                           width: 10,
                                         ),
@@ -963,7 +849,6 @@ class _ProceedPageState extends State<ProceedPage> {
                       ),
                     ),
                   ),
-                  //additional if statement
 
                   ...yardsSize(),
 
@@ -987,9 +872,7 @@ class _ProceedPageState extends State<ProceedPage> {
                                   value: "Male",
                                   groupValue: gender,
                                   title: const Text("Male"),
-                                  //subtitle: Text(user.lastName),
                                   onChanged: (value) {
-                                    // print("Current User ${currentUser.firstName}");
                                     setSelectedGender(value);
                                   },
                                   selected: gender == "Male",
@@ -1001,9 +884,7 @@ class _ProceedPageState extends State<ProceedPage> {
                                   value: "Female",
                                   groupValue: gender,
                                   title: const Text("Female"),
-                                  //subtitle: Text(user.lastName),
                                   onChanged: (value) {
-                                    // print("Current User ${currentUser.firstName}");
                                     setSelectedGender(value);
                                   },
                                   selected: gender == "Female",
@@ -1051,24 +932,18 @@ class _ProceedPageState extends State<ProceedPage> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Row(
-                    children: const [
-                      Flexible(
-                        child: Text(
-                          "Dear Customer, Please note that Liberty Fashion will not be held responsible for any wrong order and measurement that you input on our fashion app. For any measurement or images that does not meet up to our requirements would imply a refund.",
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.red,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
+                  const DisclaimerView(),
                   const SizedBox(
                     height: 10,
                   ),
-                  bottom()
+                  ProductMeasurementActionsButton(
+                    addToCart: addToCart,
+                    collectionName: collectionName,
+                    fabric: fabric,
+                    mode: mode,
+                    numberOfYards: numberOfYards,
+                    product: product,
+                  )
                 ],
               ),
             ),

@@ -15,35 +15,51 @@ class LibertyFashionApp extends StatefulWidget {
 }
 
 class _LibertyFashionAppState extends State<LibertyFashionApp> {
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  //final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _initialization,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return ScreenUtilInit(
-            designSize: const Size(375, 812),
-            builder: (_, __) => KeyboardDismisser(
-              gestures: const [GestureType.onTap],
-              child: MaterialApp(
-                title: 'Liberty Fashion App',
-                theme: ThemeData(
-                  primarySwatch: Colors.blue,
-                ),
-                home: const TabView(),
-                navigatorObservers: <NavigatorObserver>[
-                  locator<AnalyticsServiceImpl>().firebaseAnalyticsObserver,
-                ],
-              ),
-            ),
-          );
-        }
-        //Todo handle this well, when firebase fails to initialize
-        return const CircularProgressIndicator(
-          color: Colors.white,
-        );
-      },
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      builder: (_, __) => KeyboardDismisser(
+        gestures: const [GestureType.onTap],
+        child: MaterialApp(
+          title: 'Liberty Fashion App',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: const TabView(),
+          navigatorObservers: <NavigatorObserver>[
+            locator<AnalyticsServiceImpl>().firebaseAnalyticsObserver,
+          ],
+        ),
+      ),
     );
+    // return FutureBuilder(
+    //   future: _initialization,
+    //   builder: (context, snapshot) {
+    //     if (snapshot.hasData) {
+    //       return ScreenUtilInit(
+    //         designSize: const Size(375, 812),
+    //         builder: (_, __) => KeyboardDismisser(
+    //           gestures: const [GestureType.onTap],
+    //           child: MaterialApp(
+    //             title: 'Liberty Fashion App',
+    //             theme: ThemeData(
+    //               primarySwatch: Colors.blue,
+    //             ),
+    //             home: const TabView(),
+    //             navigatorObservers: <NavigatorObserver>[
+    //               locator<AnalyticsServiceImpl>().firebaseAnalyticsObserver,
+    //             ],
+    //           ),
+    //         ),
+    //       );
+    //     }
+    //     //Todo handle this well, when firebase fails to initialize
+    //     return const CircularProgressIndicator(
+    //       color: Colors.white,
+    //     );
+    //   },
+    // );
   }
 }

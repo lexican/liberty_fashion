@@ -91,7 +91,7 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
         _bicep.text = item['bicep'] != null ? item['bicep'].toString() : "0";
         _wrist.text = item['wrist'] != null ? item['wrist'].toString() : "0";
 
-        _wrist.text = item['waist'] != null ? item['waist'].toString() : "0";
+        _waist.text = item['waist'] != null ? item['waist'].toString() : "0";
 
         _hip.text = item['hip'] != null ? item['hip'].toString() : "0";
 
