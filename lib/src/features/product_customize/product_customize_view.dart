@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:liberty_fashion/src/core/constants/collection_name.dart';
 import 'package:liberty_fashion/src/core/models/models.dart';
 import 'package:liberty_fashion/src/core/utils/utils.dart';
 import 'package:liberty_fashion/src/core/widgets/decimal_text_input_formatter/decimal_text_input_formatter.dart';
@@ -11,6 +11,7 @@ import 'package:liberty_fashion/src/core/widgets/modals/liberty_fashion_modal.da
 import 'package:liberty_fashion/src/features/fabric_list/fabric_list.dart';
 import 'package:liberty_fashion/src/features/men_measurement_modal/men_measurement_modal.dart';
 import 'package:liberty_fashion/src/features/men_measurement_view/men_measurement_view.dart';
+import 'package:liberty_fashion/src/features/product_customize/cart_item/cart_item.dart';
 import 'package:liberty_fashion/src/features/product_customize/disclaimer_view/disclaimer_view.dart';
 import 'package:liberty_fashion/src/features/product_customize/product_customize_view_actions_button/product_customize_view_actions_button.dart';
 import 'package:liberty_fashion/src/features/women_measurement_modal/woman_measurement_modal.dart';
@@ -80,16 +81,16 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
     _numberOfYardsCL.text = numberOfYards.toString();
 
     if (mode == "New") {
-      if (widget.collectionName == "Children") {
+      if (widget.collectionName == CollectionName.childrenCollectionName) {
         showAll = true;
       }
-      if (widget.collectionName == "Women") {
+      if (widget.collectionName == CollectionName.womenCollectionName) {
         setState(() {
           gender = "Female";
         });
       }
 
-      if (widget.collectionName == "Fabrics") {
+      if (widget.collectionName == CollectionName.fabricCollectionName) {
         setState(() {
           fabric = product;
         });
@@ -160,41 +161,43 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
 
   void loadWomenMeasurement() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      if (prefs.getString("measurementWomen") != null) {
-        Map<String, dynamic> item =
-            json.decode(prefs.getString("measurementWomen") ?? "");
-        measurementWomen.shoulder = item['shoulder'];
-        measurementWomen.sleeve = item['sleeve'];
-        measurementWomen.sleeveShortLength = item['sleeveShortLength'];
-        measurementWomen.sleeve34Length = item['sleeve34Length'];
-        measurementWomen.sleeveFullLength = item['sleeveFullLength'];
-        measurementWomen.bust = item['bust'];
-        measurementWomen.bustPoint = item['bustPoint'];
-        measurementWomen.shoulderToUnderBust = item['shoulderToUnderBust'];
-        measurementWomen.roundUnderBust = item['roundUnderBust'];
-        measurementWomen.halfLength = item['halfLength'];
-        measurementWomen.blouseWaist = item['blouseWaist'];
-        measurementWomen.blouseLength = item['blouseLength'];
-        measurementWomen.skirtWaist = item['skirtWaist'];
-        measurementWomen.hips = item['hips'];
-        measurementWomen.dressLength = item['dressLength'];
-        measurementWomen.dress34Length = item['dress34Length'];
-        measurementWomen.dressKneeLength = item['dressKneeLength'];
-        measurementWomen.dressHalfLength = item['dressHalfLength'];
-        measurementWomen.dressFloorLength = item['dressFloorLength'];
-        measurementWomen.skirtLength = item['skirtLength'];
-        measurementWomen.skirt34Length = item['skirt34Length'];
-        measurementWomen.skirtKneeLength = item['skirtKneeLength'];
-        measurementWomen.skirtShortLength = item['skirtShortLength'];
-        measurementWomen.skirtFloorLength = item['skirtFloorLength'];
-        measurementWomen.info = item['info'];
-      }
-    });
+    setState(
+      () {
+        if (prefs.getString("measurementWomen") != null) {
+          Map<String, dynamic> item =
+              json.decode(prefs.getString("measurementWomen") ?? "");
+          measurementWomen.shoulder = item['shoulder'];
+          measurementWomen.sleeve = item['sleeve'];
+          measurementWomen.sleeveShortLength = item['sleeveShortLength'];
+          measurementWomen.sleeve34Length = item['sleeve34Length'];
+          measurementWomen.sleeveFullLength = item['sleeveFullLength'];
+          measurementWomen.bust = item['bust'];
+          measurementWomen.bustPoint = item['bustPoint'];
+          measurementWomen.shoulderToUnderBust = item['shoulderToUnderBust'];
+          measurementWomen.roundUnderBust = item['roundUnderBust'];
+          measurementWomen.halfLength = item['halfLength'];
+          measurementWomen.blouseWaist = item['blouseWaist'];
+          measurementWomen.blouseLength = item['blouseLength'];
+          measurementWomen.skirtWaist = item['skirtWaist'];
+          measurementWomen.hips = item['hips'];
+          measurementWomen.dressLength = item['dressLength'];
+          measurementWomen.dress34Length = item['dress34Length'];
+          measurementWomen.dressKneeLength = item['dressKneeLength'];
+          measurementWomen.dressHalfLength = item['dressHalfLength'];
+          measurementWomen.dressFloorLength = item['dressFloorLength'];
+          measurementWomen.skirtLength = item['skirtLength'];
+          measurementWomen.skirt34Length = item['skirt34Length'];
+          measurementWomen.skirtKneeLength = item['skirtKneeLength'];
+          measurementWomen.skirtShortLength = item['skirtShortLength'];
+          measurementWomen.skirtFloorLength = item['skirtFloorLength'];
+          measurementWomen.info = item['info'];
+        }
+      },
+    );
   }
 
   void loadData() {
-    if (widget.collectionName == "Children") {
+    if (widget.collectionName == CollectionName.childrenCollectionName) {
       showAll = true;
       if (cart.menMeasurement != null) {
         setState(() {
@@ -206,12 +209,12 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
         });
       }
     }
-    if (widget.collectionName == "Women") {
+    if (widget.collectionName == CollectionName.womenCollectionName) {
       setState(() {
         gender = "Female";
       });
     }
-    if (widget.collectionName == "Men") {
+    if (widget.collectionName == CollectionName.menCollectionName) {
       setState(() {
         gender = "Male";
       });
@@ -272,8 +275,8 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
       //     id: mode == "Edit" ? cart.id : uuid.v1(),
       //     item: item,
       //     quantity: 1,
-      //     men: collectionName == "Men" ? measurementMen : null,
-      //     women: collectionName != "Men" ? measurementWomen : null,
+      //     men: collectionName == CollectionName.menCollectionName ? measurementMen : null,
+      //     women: collectionName != CollectionName.menCollectionName ? measurementWomen : null,
       //     fabricId: fabric.id,
       //     fabricName: fabric.name,
       //     fabricNoOfYards: rounded,
@@ -339,125 +342,6 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
   //   );
   //}
 
-  Widget cartItem() {
-    String productName = product.name ?? "";
-    String fabricName = fabric.name ?? "";
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      height: 120,
-      width: double.infinity,
-      child: Row(
-        children: [
-          Stack(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10.0),
-                child: SizedBox(
-                  width: 85,
-                  height: 120,
-                  child: CachedNetworkImage(
-                    imageUrl: product.productImageUrl ?? '',
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => const SizedBox(
-                      width: 85,
-                      height: 120,
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    ),
-                    errorWidget: (context, url, error) => Center(
-                      child: Container(
-                        color: Colors.white,
-                        height: 150,
-                      ),
-                    ),
-                    fadeOutDuration: const Duration(seconds: 1),
-                    fadeInDuration: const Duration(seconds: 3),
-                  ),
-                ),
-              ),
-              (collectionName == "Fabrics")
-                  ? Container(
-                      alignment: Alignment.bottomLeft,
-                      width: 85,
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 5, vertical: 5),
-                      child: const Text(
-                        "1/1",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0),
-                      ),
-                    )
-                  : Container(
-                      alignment: Alignment.bottomLeft,
-                      width: 85,
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 5, vertical: 5),
-                      child: Text(
-                        fabric.name != null ? "1/2" : "1/1",
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0,
-                        ),
-                      ),
-                    )
-            ],
-          ),
-          const SizedBox(
-            width: 5,
-          ),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 6,
-                ),
-                collectionName == "Fabrics"
-                    ? Text(
-                        fabric.name ?? "",
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        style: const TextStyle(
-                          fontFamily: "SegoeUi",
-                          fontSize: 14,
-                        ),
-                      )
-                    : Text(
-                        productName +
-                            (fabricName != "" ? (" + " + fabricName) : ""),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        style: const TextStyle(
-                          fontFamily: "SegoeUi",
-                          fontSize: 14,
-                        ),
-                      ),
-                const SizedBox(
-                  height: 6,
-                ),
-                Text(
-                  "\u20A6 " +
-                      moneyFormat(fabric.price != null
-                          ? (product.price + fabric.price).toString()
-                          : product.price.toString()),
-                  style: const TextStyle(
-                    fontFamily: "SegoeUi",
-                    fontSize: 14,
-                  ),
-                )
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
   void setSelectedGender(value) {
     if (value != gender) {
       setState(() {
@@ -487,56 +371,6 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
     //     print('No image selected.');
     //   }
     // });
-  }
-
-  List<Widget> yardsSize() {
-    List<Widget> items = [];
-
-    items.add(const SizedBox(
-      height: 10,
-    ));
-
-    items.add(Container(
-      color: Colors.white,
-      padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10, top: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text(
-            fabric.name ?? "No Fabric Selected.",
-            style: TextStyle(
-              color: fabric.name != null ? Colors.black : Colors.red,
-              fontSize: 18,
-              fontFamily: 'Roboto',
-              fontWeight: FontWeight.w500,
-            ),
-          )
-        ],
-      ),
-    ));
-    items.add(
-      Container(
-        padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
-        color: Colors.white,
-        child: LibertyFashionTextField(
-          controller: _numberOfYardsCL,
-          labelText: 'Number of Yards(Min 4, Max 12)',
-          labelStyle: const TextStyle(
-              color: Colors.black87, fontSize: 18, fontFamily: 'SegoeUi'),
-          onChanged: (String val) {
-            try {
-              numberOfYards = double.parse(val);
-            } catch (e) {
-              logger.e(e);
-            }
-          },
-          inputFormatters: [DecimalTextInputFormatter(decimalRange: 1)],
-          textStyle: const TextStyle(
-              color: Colors.black87, fontSize: 16, fontFamily: 'SegoeUi'),
-        ),
-      ),
-    );
-    return items;
   }
 
   @override
@@ -584,22 +418,28 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
           },
           child: Container(
             height: size.height - kToolbarHeight - 24,
-            //color: Color(0xFFE5E5E5),
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  cartItem(),
+                  CartItem(
+                    collectionName: collectionName,
+                    fabric: fabric,
+                    product: product,
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
                   SizedBox(
-                    height: collectionName == "Fabrics" ? 80 : 160,
+                    height:
+                        collectionName == CollectionName.fabricCollectionName
+                            ? 80
+                            : 160,
                     child: Column(
                       children: [
-                        collectionName == "Fabrics"
+                        collectionName == CollectionName.fabricCollectionName
                             ? GestureDetector(
                                 onTap: () {
                                   //getImage()
@@ -667,7 +507,7 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
                                 ),
                               )
                             : Container(),
-                        collectionName != "Fabrics"
+                        collectionName != CollectionName.fabricCollectionName
                             ? GestureDetector(
                                 onTap: () {
                                   pushToNewScreen(context);
@@ -718,13 +558,15 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
                                 ),
                               )
                             : Container(),
-                        collectionName != "Fabrics"
+                        collectionName != CollectionName.fabricCollectionName
                             ? GestureDetector(
                                 onTap: () {
                                   logger.i("collectionName: $collectionName");
-                                  if (collectionName == "Men") {
+                                  if (collectionName ==
+                                      CollectionName.menCollectionName) {
                                     openMenMeasurementModal();
-                                  } else if (collectionName == "Women") {
+                                  } else if (collectionName ==
+                                      CollectionName.womenCollectionName) {
                                     openWomenMeasurementModal();
                                   } else if (showAll && gender == "Male") {
                                     openMenMeasurementModal();
@@ -783,11 +625,64 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
                       ],
                     ),
                   ),
-                  ...yardsSize(),
+                  //Fabric measurement section
+                  ...[
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      color: Colors.white,
+                      padding: const EdgeInsets.only(
+                          left: 20, right: 20, bottom: 10, top: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            fabric.name ?? "No Fabric Selected.",
+                            style: TextStyle(
+                              color: fabric.name != null
+                                  ? Colors.black
+                                  : Colors.red,
+                              fontSize: 18,
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w500,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.only(
+                          left: 20, right: 20, bottom: 10),
+                      color: Colors.white,
+                      child: LibertyFashionTextField(
+                        controller: _numberOfYardsCL,
+                        labelText: 'Number of Yards(Min 4, Max 12)',
+                        labelStyle: const TextStyle(
+                            color: Colors.black87,
+                            fontSize: 18,
+                            fontFamily: 'SegoeUi'),
+                        onChanged: (String val) {
+                          try {
+                            numberOfYards = double.parse(val);
+                          } catch (e) {
+                            logger.e(e);
+                          }
+                        },
+                        inputFormatters: [
+                          DecimalTextInputFormatter(decimalRange: 1)
+                        ],
+                        textStyle: const TextStyle(
+                            color: Colors.black87,
+                            fontSize: 16,
+                            fontFamily: 'SegoeUi'),
+                      ),
+                    ),
+                  ],
                   const SizedBox(
                     height: 10,
                   ),
-                  (collectionName == "Children")
+                  (collectionName == CollectionName.childrenCollectionName)
                       ? const SizedBox(
                           height: 10,
                         )
@@ -825,7 +720,7 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
                           ),
                         )
                       : Container(),
-                  collectionName == "Men"
+                  collectionName == CollectionName.menCollectionName
                       ? MenMeasurementView(
                           type: menStyle,
                           measurementMen: measurementMen,
@@ -833,7 +728,7 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
                           showEditIcon: true,
                         )
                       : Container(),
-                  collectionName == "Women"
+                  collectionName == CollectionName.womenCollectionName
                       ? WomenMeasurementView(
                           measurementWomen: measurementWomen,
                           onEditFunction: openMeasurementForm,

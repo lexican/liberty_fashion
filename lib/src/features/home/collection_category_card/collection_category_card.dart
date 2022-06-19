@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:liberty_fashion/src/core/models/models.dart';
 
-import '../utils/utils.dart';
+import '../../../core/utils/utils.dart';
 
 class CollectionCategoryCard extends StatelessWidget {
   const CollectionCategoryCard(

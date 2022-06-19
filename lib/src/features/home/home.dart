@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:liberty_fashion/src/core/api/api.dart';
 import 'package:liberty_fashion/src/core/models/models.dart';
 import 'package:liberty_fashion/src/core/utils/utils.dart';
-import 'package:liberty_fashion/src/core/widgets/collection_category_card.dart';
+import 'package:liberty_fashion/src/features/home/collection_category_card/collection_category_card.dart';
 import 'package:liberty_fashion/src/features/products/products.dart';
 
 class Home extends StatefulWidget {
