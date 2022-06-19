@@ -25,20 +25,3 @@ void main() {
 
 
 
-//  return BlocProvider(
-//               blocs: [
-//           Bloc((i) => CartListBloc()),
-//           Bloc((i) => CartTotalBlocController()),
-//           Bloc((i) => WishListBloc())
-//         ],
-//           child: MaterialApp(
-//         title: 'Flutter Demo',
-//         theme: ThemeData(
-//             primarySwatch: Colors.blue,
-//             visualDensity: VisualDensity.adaptivePlatformDensity,
-//             fontFamily: 'SegoeUi',
-//             backgroundColor: Parameters.backgroundColor),
-//         home: LandingPage(),
-//         debugShowCheckedModeBanner: false,
-//       ),
-//     );

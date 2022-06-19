@@ -9,7 +9,7 @@ class ProductModel {
       this.name,
       this.shortDescription,
       this.productImageUrl,
-      this.price});
+      this.price = 0});
 
   dynamic collectionCategoryId;
   int? createDate;
