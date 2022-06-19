@@ -7,12 +7,12 @@ import 'package:liberty_fashion/src/core/models/models.dart';
 import 'package:liberty_fashion/src/core/utils/utils.dart';
 import 'package:liberty_fashion/src/core/widgets/decimal_text_input_formatter/decimal_text_input_formatter.dart';
 import 'package:liberty_fashion/src/core/widgets/input_fields/liberty_fashion_text_field.dart';
-import 'package:liberty_fashion/src/core/widgets/modals/floating_modal.dart';
+import 'package:liberty_fashion/src/core/widgets/modals/liberty_fashion_modal.dart';
 import 'package:liberty_fashion/src/features/fabric_list/fabric_list.dart';
 import 'package:liberty_fashion/src/features/men_measurement_modal/men_measurement_modal.dart';
 import 'package:liberty_fashion/src/features/men_measurement_view/men_measurement_view.dart';
-import 'package:liberty_fashion/src/features/product_add_measurement/disclaimer_view/disclaimer_view.dart';
-import 'package:liberty_fashion/src/features/product_add_measurement/product_measurement_actions_button/product_measurement_actions_button.dart';
+import 'package:liberty_fashion/src/features/product_customize/disclaimer_view/disclaimer_view.dart';
+import 'package:liberty_fashion/src/features/product_customize/product_customize_view_actions_button/product_customize_view_actions_button.dart';
 import 'package:liberty_fashion/src/features/women_measurement_modal/woman_measurement_modal.dart';
 import 'package:liberty_fashion/src/features/women_measurement_view/women_measurement_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,13 +20,13 @@ import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();
 
-class ProceedPage extends StatefulWidget {
+class ProductCustomizeView extends StatefulWidget {
   final ProductModel product;
   final CartModel? cart;
   final String collectionName;
   final String mode;
 
-  const ProceedPage({
+  const ProductCustomizeView({
     Key? key,
     required this.product,
     this.cart,
@@ -35,10 +35,10 @@ class ProceedPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ProceedPageState createState() => _ProceedPageState();
+  _ProductCustomizeViewState createState() => _ProductCustomizeViewState();
 }
 
-class _ProceedPageState extends State<ProceedPage> {
+class _ProductCustomizeViewState extends State<ProductCustomizeView> {
   late ProductModel product;
   late String collectionName;
   late String gender;
@@ -70,7 +70,6 @@ class _ProceedPageState extends State<ProceedPage> {
   void initState() {
     product = widget.product;
     collectionName = widget.collectionName;
-    //print("collectionName: " + collectionName);
     mode = widget.mode;
     if (widget.cart != null) {
       cart = widget.cart!;
@@ -100,9 +99,6 @@ class _ProceedPageState extends State<ProceedPage> {
       loadWomenMeasurement();
     } else {
       _numberOfYardsCL.text = widget.cart!.fabricNoOfYards.toString();
-
-      print("widget.cart.fabricNoOfYards " +
-          widget.cart!.fabricNoOfYards.toString());
       loadData();
     }
     super.initState();
@@ -115,40 +111,30 @@ class _ProceedPageState extends State<ProceedPage> {
 
   void openMeasurementForm() {
     if (gender == "Male") {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => MenMeasurementModal(
-            onSave: updateMeasurement,
-            type: menStyle,
-          ),
-        ),
-      );
-      showFloatingModalBottomSheet(
-        context: context,
-        builder: (context, scrollController) => MenMeasurementModal(
-          onSave: updateMeasurement,
-          type: menStyle,
-        ),
-      );
+      openMenMeasurementModal();
     } else {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => WomenMeasurementModal(
-            type: womenStyle,
-            onSave: updateMeasurement,
-          ),
-        ),
-      );
-      showFloatingModalBottomSheet(
-        context: context,
-        builder: (context, scrollController) => WomenMeasurementModal(
-          type: womenStyle,
-          onSave: updateMeasurement,
-        ),
-      );
+      openWomenMeasurementModal();
     }
+  }
+
+  void openMenMeasurementModal() {
+    LibertyFashionModal(
+      child: MenMeasurementModal(
+        type: menStyle,
+        onSave: updateMeasurement,
+      ),
+      context: context,
+    );
+  }
+
+  void openWomenMeasurementModal() {
+    LibertyFashionModal(
+      child: WomenMeasurementModal(
+        type: womenStyle,
+        onSave: updateMeasurement,
+      ),
+      context: context,
+    );
   }
 
   void loadMenMeasurement() async {
@@ -575,24 +561,19 @@ class _ProceedPageState extends State<ProceedPage> {
           ),
           actions: [
             IconButton(
-                onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => CartPage(),
-                  //   ),
-                  // );
-                },
-                icon: const Icon(
-                  Icons.shopping_cart,
-                  color: primaryColor,
-                )),
-            // IconButton(
-            //     onPressed: null,
-            //     icon: Icon(
-            //       Icons.more_horiz,
-            //       color: Parameters.primaryColor,
-            //     ))
+              onPressed: () {
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => CartPage(),
+                //   ),
+                // );
+              },
+              icon: const Icon(
+                Icons.shopping_cart,
+                color: primaryColor,
+              ),
+            ),
           ],
         ),
         body: GestureDetector(
@@ -614,254 +595,203 @@ class _ProceedPageState extends State<ProceedPage> {
                   const SizedBox(
                     height: 20,
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      //pushToNewScreen(context);
-                      // FabricGrid()
-                      // showMaterialModalBottomSheet(
-                      //     expand: true,
-                      //     context: context,
-                      //     backgroundColor: Colors.transparent,
-                      //     builder: (context, scrollController) => FabricGrid());
-
-                      // if (showFabricYards == false) {
-                      //   setState(() {
-                      //     showFabricYards = true;
-                      //   });
-                      // }
-                    },
-                    child: SizedBox(
-                      height: collectionName == "Fabrics" ? 80 : 160,
-                      child: Column(
-                        children: [
-                          collectionName == "Fabrics"
-                              ? GestureDetector(
-                                  onTap: () {
-                                    //getImage()
-                                    //_showPicker(context);
-                                  },
-                                  child: Container(
-                                    width: double.infinity,
-                                    color: Colors.white,
-                                    height: 80,
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 0, vertical: 0),
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 15, vertical: 10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        _image == null
-                                            ? SvgPicture.asset(
-                                                "assets/images/fabric.svg",
-                                                color: Colors.red,
-                                                semanticsLabel:
-                                                    'A red up arrow')
-                                            : CircleAvatar(
-                                                radius: 20,
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                  child: Image.file(
-                                                    _image!,
-                                                    width: 40,
-                                                    height: 40,
-                                                    fit: BoxFit.fitHeight,
-                                                  ),
+                  SizedBox(
+                    height: collectionName == "Fabrics" ? 80 : 160,
+                    child: Column(
+                      children: [
+                        collectionName == "Fabrics"
+                            ? GestureDetector(
+                                onTap: () {
+                                  //getImage()
+                                  //_showPicker(context);
+                                },
+                                child: Container(
+                                  width: double.infinity,
+                                  color: Colors.white,
+                                  height: 80,
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 0, vertical: 0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15, vertical: 10),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      _image == null
+                                          ? SvgPicture.asset(
+                                              "assets/images/fabric.svg",
+                                              color: Colors.red,
+                                              semanticsLabel: 'A red up arrow')
+                                          : CircleAvatar(
+                                              radius: 20,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                child: Image.file(
+                                                  _image!,
+                                                  width: 40,
+                                                  height: 40,
+                                                  fit: BoxFit.fitHeight,
                                                 ),
                                               ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        Expanded(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Style",
-                                                style: headingStyle,
-                                              ),
-                                              const SizedBox(
-                                                height: 10,
-                                              ),
-                                              const Text(
-                                                "Choose your preferred Style",
-                                                style: TextStyle(
-                                                    fontFamily: "Roboto",
-                                                    fontSize: 14,
-                                                    color: Color(0xFF686868)),
-                                              )
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              : Container(),
-                          collectionName != "Fabrics"
-                              ? GestureDetector(
-                                  onTap: () {
-                                    pushToNewScreen(context);
-                                  },
-                                  child: Container(
-                                    width: double.infinity,
-                                    color: Colors.white,
-                                    height: 80,
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 0, vertical: 0),
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 15, vertical: 10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        SvgPicture.asset(
-                                            "assets/images/fabric.svg",
-                                            color: Colors.red,
-                                            semanticsLabel: 'A red up arrow'),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        Expanded(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text("Fabric",
-                                                  style: headingStyle),
-                                              const SizedBox(
-                                                height: 10,
-                                              ),
-                                              const Text(
-                                                "Choose your preferred Fabric",
-                                                style: TextStyle(
+                                            ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Style",
+                                              style: headingStyle,
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            const Text(
+                                              "Choose your preferred Style",
+                                              style: TextStyle(
                                                   fontFamily: "Roboto",
                                                   fontSize: 14,
-                                                  color: Color(0xFF686868),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
+                                                  color: Color(0xFF686868)),
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                )
-                              : Container(),
-                          collectionName != "Fabrics"
-                              ? GestureDetector(
-                                  onTap: () {
-                                    if (collectionName == "Men") {
-                                      showFloatingModalBottomSheet(
-                                        context: context,
-                                        builder: (context, scrollController) =>
-                                            MenMeasurementModal(
-                                          type: menStyle,
-                                          onSave: () {},
-                                        ),
-                                      );
-                                    } else if (collectionName == "Women") {
-                                      showFloatingModalBottomSheet(
-                                        context: context,
-                                        builder: (context, scrollController) =>
-                                            WomenMeasurementModal(
-                                          type: womenStyle,
-                                          onSave: () {},
-                                        ),
-                                      );
-                                    } else if (showAll && gender == "Male") {
-                                      showFloatingModalBottomSheet(
-                                        context: context,
-                                        builder: (context, scrollController) =>
-                                            MenMeasurementModal(
-                                          type: menStyle,
-                                          onSave: () {},
-                                        ),
-                                      );
-                                    } else if (showAll && gender == "Female") {
-                                      showFloatingModalBottomSheet(
-                                        context: context,
-                                        builder: (context, scrollController) =>
-                                            WomenMeasurementModal(
-                                          type: womenStyle,
-                                          onSave: updateMeasurement,
-                                        ),
-                                      );
-                                    }
-                                  },
-                                  child: Container(
-                                    height: 80,
-                                    width: double.infinity,
-                                    color: Colors.white,
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 0, vertical: 0),
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 15, vertical: 10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        SvgPicture.asset(
-                                            "assets/images/measurement.svg",
-                                            //color: Colors.red,
-                                            semanticsLabel: 'A red up arrow'),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        Expanded(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Measurement",
-                                                style: headingStyle,
+                                ),
+                              )
+                            : Container(),
+                        collectionName != "Fabrics"
+                            ? GestureDetector(
+                                onTap: () {
+                                  pushToNewScreen(context);
+                                },
+                                child: Container(
+                                  width: double.infinity,
+                                  color: Colors.white,
+                                  height: 80,
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 0, vertical: 0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15, vertical: 10),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SvgPicture.asset(
+                                          "assets/images/fabric.svg",
+                                          color: Colors.red,
+                                          semanticsLabel: 'A red up arrow'),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Fabric", style: headingStyle),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            const Text(
+                                              "Choose your preferred Fabric",
+                                              style: TextStyle(
+                                                fontFamily: "Roboto",
+                                                fontSize: 14,
+                                                color: Color(0xFF686868),
                                               ),
-                                              const SizedBox(
-                                                height: 10,
-                                              ),
-                                              const Text(
-                                                "Choose your preferred Measurement",
-                                                style: TextStyle(
-                                                  fontFamily: "Roboto",
-                                                  fontSize: 14,
-                                                  color: Color(0xFF686868),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                )
-                              : Container(),
-                        ],
-                      ),
+                                ),
+                              )
+                            : Container(),
+                        collectionName != "Fabrics"
+                            ? GestureDetector(
+                                onTap: () {
+                                  logger.i("collectionName: $collectionName");
+                                  if (collectionName == "Men") {
+                                    openMenMeasurementModal();
+                                  } else if (collectionName == "Women") {
+                                    openWomenMeasurementModal();
+                                  } else if (showAll && gender == "Male") {
+                                    openMenMeasurementModal();
+                                  } else if (showAll && gender == "Female") {
+                                    openWomenMeasurementModal();
+                                  }
+                                },
+                                child: Container(
+                                  height: 80,
+                                  width: double.infinity,
+                                  color: Colors.white,
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 0, vertical: 0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15, vertical: 10),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SvgPicture.asset(
+                                          "assets/images/measurement.svg",
+                                          semanticsLabel: 'A red up arrow'),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Measurement",
+                                              style: headingStyle,
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            const Text(
+                                              "Choose your preferred Measurement",
+                                              style: TextStyle(
+                                                fontFamily: "Roboto",
+                                                fontSize: 14,
+                                                color: Color(0xFF686868),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              )
+                            : Container(),
+                      ],
                     ),
                   ),
-
                   ...yardsSize(),
-
                   const SizedBox(
                     height: 10,
                   ),
-
                   (collectionName == "Children")
                       ? const SizedBox(
                           height: 10,
                         )
                       : Container(),
-
                   (showAll)
                       ? Container(
                           color: Colors.white,
@@ -895,7 +825,6 @@ class _ProceedPageState extends State<ProceedPage> {
                           ),
                         )
                       : Container(),
-
                   collectionName == "Men"
                       ? MenMeasurementView(
                           type: menStyle,
@@ -928,7 +857,6 @@ class _ProceedPageState extends State<ProceedPage> {
                           type: womenStyle,
                         )
                       : Container(),
-
                   const SizedBox(
                     height: 10,
                   ),
@@ -936,7 +864,7 @@ class _ProceedPageState extends State<ProceedPage> {
                   const SizedBox(
                     height: 10,
                   ),
-                  ProductMeasurementActionsButton(
+                  ProductCustomizeViewActionsButton(
                     addToCart: addToCart,
                     collectionName: collectionName,
                     fabric: fabric,

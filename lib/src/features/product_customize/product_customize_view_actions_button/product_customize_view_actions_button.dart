@@ -4,14 +4,14 @@ import 'package:liberty_fashion/src/core/widgets/buttons/liberty_fashion_button.
 
 import '../../../core/utils/utils.dart';
 
-class ProductMeasurementActionsButton extends StatelessWidget {
+class ProductCustomizeViewActionsButton extends StatelessWidget {
   final String mode;
   final String collectionName;
   final Function(ProductModel) addToCart;
   final ProductModel fabric;
   final ProductModel product;
   final double numberOfYards;
-  const ProductMeasurementActionsButton(
+  const ProductCustomizeViewActionsButton(
       {Key? key,
       required this.mode,
       required this.collectionName,

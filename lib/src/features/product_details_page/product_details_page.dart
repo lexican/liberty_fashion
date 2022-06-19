@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:liberty_fashion/src/core/models/models.dart';
-import 'package:liberty_fashion/src/features/product_add_measurement/product_add_measurement.dart';
+import 'package:liberty_fashion/src/features/product_customize/product_customize_view.dart';
 import 'package:liberty_fashion/src/features/product_details_image/product_details_image.dart';
 
 import '../../core/utils/utils.dart';
@@ -176,7 +176,7 @@ class _CollectionDetailsPageState extends State<ProductDetails> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => ProceedPage(
+                                  builder: (context) => ProductCustomizeView(
                                     collectionName: widget
                                         .collectionCategoryModel.collectionName,
                                     mode: "New",

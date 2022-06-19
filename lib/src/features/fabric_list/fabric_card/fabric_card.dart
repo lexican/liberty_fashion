@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:liberty_fashion/src/core/models/models.dart';
 
-import '../../models/models.dart';
-import '../../utils/utils.dart';
+import '../../../core/utils/utils.dart';
 
 class FabricCard extends StatefulWidget {
   final ProductModel product;

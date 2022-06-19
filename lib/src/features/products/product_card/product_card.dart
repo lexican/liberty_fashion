@@ -1,8 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:liberty_fashion/src/core/models/collections_category_model.dart';
+import 'package:liberty_fashion/src/core/models/models.dart';
 import 'package:liberty_fashion/src/features/product_details_page/product_details_page.dart';
-import '../../models/product_model.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductModel product;

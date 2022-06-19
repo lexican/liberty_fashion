@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:liberty_fashion/src/core/api/api.dart';
 import 'package:liberty_fashion/src/core/models/models.dart';
-import 'package:liberty_fashion/src/core/widgets/product_card/product_card.dart';
 
 import '../../core/utils/utils.dart';
+import 'product_card/product_card.dart';
 
 class Products extends StatefulWidget {
   final CollectionCategoryModel collectionCategory;

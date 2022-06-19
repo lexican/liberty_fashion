@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:liberty_fashion/src/core/api/api.dart';
 import 'package:liberty_fashion/src/core/models/models.dart';
-import 'package:liberty_fashion/src/core/widgets/fabric_card/fabric_card.dart';
+import 'package:liberty_fashion/src/features/fabric_list/fabric_card/fabric_card.dart';
 
 class FabricList extends StatefulWidget {
   final String selectedId;
