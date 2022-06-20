@@ -1,13 +1,16 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:liberty_fashion/src/core/bloc/bloc.dart';
 import 'package:liberty_fashion/src/core/constants/collection_name.dart';
 import 'package:liberty_fashion/src/core/models/models.dart';
 import 'package:liberty_fashion/src/core/utils/utils.dart';
 import 'package:liberty_fashion/src/core/widgets/decimal_text_input_formatter/decimal_text_input_formatter.dart';
 import 'package:liberty_fashion/src/core/widgets/input_fields/liberty_fashion_text_field.dart';
 import 'package:liberty_fashion/src/core/widgets/modals/liberty_fashion_modal.dart';
+import 'package:liberty_fashion/src/features/cart/cart_view.dart';
 import 'package:liberty_fashion/src/features/fabric_list/fabric_list.dart';
 import 'package:liberty_fashion/src/features/men_measurement_modal/men_measurement_modal.dart';
 import 'package:liberty_fashion/src/features/men_measurement_view/men_measurement_view.dart';
@@ -61,6 +64,8 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
       ProductModel(createDate: DateTime.now().millisecondsSinceEpoch);
 
   final TextEditingController _numberOfYardsCL = TextEditingController();
+
+  final CartBloc cartBloc = BlocProvider.getBloc<CartBloc>();
 
   double numberOfYards = 4.0;
 
@@ -260,33 +265,23 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
     if (fabric.name != '') {
       double a = numberOfYards * 2;
       double rounded = a.ceil() / 2;
-      print(
-          "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&7");
-      print("rounded: " + rounded.toString());
-      print(
-          "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&7");
-      // bloc.addToList(new CartModel(
-      //     catalogId: item.catalogId,
-      //     price: price,
-      //     total: price,
-      //     src: src,
-      //     productId: item.productId,
-      //     name: item.name.enUs,
-      //     id: mode == "Edit" ? cart.id : uuid.v1(),
-      //     item: item,
-      //     quantity: 1,
-      //     men: collectionName == CollectionName.menCollectionName ? measurementMen : null,
-      //     women: collectionName != CollectionName.menCollectionName ? measurementWomen : null,
-      //     fabricId: fabric.id,
-      //     fabricName: fabric.name,
-      //     fabricNoOfYards: rounded,
-      //     fabricPrice: fabric.price,
-      //     fabricSrc: fabric.url,
-      //     collectionName: collectionName,
-      //     menStyle: menStyle,
-      //     womenStyle: womenStyle));
-    } else {
-      print("No fabric selected");
+      cartBloc.addToList(
+        CartModel(
+          id: uuid.v1(),
+          product: product,
+          fabric: fabric,
+          collectionName: collectionName,
+          fabricNoOfYards: rounded,
+          menMeasurement: measurementMen,
+          womenMeasurement: measurementWomen,
+          menStyle: menStyle,
+          womenStyle: womenStyle,
+          gender: gender,
+        ),
+      );
+      showToast("Product has been successfully added to your cart");
+      Navigator.pop(context);
+      Navigator.pop(context);
     }
   }
 
@@ -305,7 +300,7 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
           fabric = value;
         });
       } else {
-        print('Do nothing');
+        logger.i('Do nothing');
       }
     });
   }
@@ -368,7 +363,7 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
     //         textColor: Colors.white,
     //         fontSize: 16.0);
     //   } else {
-    //     print('No image selected.');
+    //     logger.i('No image selected.');
     //   }
     // });
   }
@@ -396,12 +391,12 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
           actions: [
             IconButton(
               onPressed: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => CartPage(),
-                //   ),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CartView(),
+                  ),
+                );
               },
               icon: const Icon(
                 Icons.shopping_cart,
@@ -642,9 +637,8 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
                                 ? fabric.name
                                 : "No Fabric Selected.",
                             style: TextStyle(
-                              color: fabric.name != ''
-                                  ? Colors.black
-                                  : Colors.red,
+                              color:
+                                  fabric.name != '' ? Colors.black : Colors.red,
                               fontSize: 18,
                               fontFamily: 'Roboto',
                               fontWeight: FontWeight.w500,

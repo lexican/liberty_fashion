@@ -66,7 +66,7 @@ String validatePhoneNumber(String value) {
 
 void showToast(String message, {Color? backgroundColor}) {
   Fluttertoast.showToast(
-      msg: "No Fabric selected",
+      msg: message,
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.CENTER,
       timeInSecForIosWeb: 1,

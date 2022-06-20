@@ -12,18 +12,21 @@ class CartModel {
   String? womenStyle;
   int quantity;
   double fabricNoOfYards;
+  String gender;
 
-  CartModel(
-      {required this.id,
-      this.product,
-      this.fabric,
-      this.collectionName,
-      this.menMeasurement,
-      this.womenMeasurement,
-      this.menStyle,
-      this.womenStyle,
-      this.quantity = 1,
-      this.fabricNoOfYards = 0.0});
+  CartModel({
+    required this.id,
+    this.product,
+    this.fabric,
+    this.collectionName,
+    this.menMeasurement,
+    this.womenMeasurement,
+    this.menStyle,
+    this.womenStyle,
+    this.quantity = 1,
+    this.fabricNoOfYards = 0.0,
+    required this.gender,
+  });
 
   factory CartModel.fromSnapshot(DocumentSnapshot doc) {
     Map? getDocs = doc.data() as Map?;
@@ -38,6 +41,7 @@ class CartModel {
       womenStyle: getDocs['womenStyle'],
       quantity: getDocs['quantity'],
       fabricNoOfYards: getDocs['fabricNoOfYards'],
+      gender: getDocs['gender']
     );
   }
 
@@ -51,6 +55,7 @@ class CartModel {
         "menStyle": menStyle,
         "womenStyle": womenStyle,
         "quantity": quantity,
-        "fabricNoOfYards": fabricNoOfYards
+        "fabricNoOfYards": fabricNoOfYards,
+        "gender": gender
       };
 }

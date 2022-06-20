@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:liberty_fashion/src/core/api/api.dart';
 import 'package:liberty_fashion/src/core/models/models.dart';
+import 'package:liberty_fashion/src/features/cart/cart_view.dart';
 
 import '../../core/utils/utils.dart';
 import 'product_card/product_card.dart';
@@ -56,8 +57,12 @@ class _ProductsState extends State<Products> {
             ),
             IconButton(
               onPressed: () {
-                // Navigator.push(
-                //     context, MaterialPageRoute(builder: (context) => CartPage()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CartView(),
+                  ),
+                );
               },
               icon: const Icon(
                 Icons.shopping_cart,

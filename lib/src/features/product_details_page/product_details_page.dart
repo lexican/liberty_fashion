@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:liberty_fashion/src/core/models/models.dart';
+import 'package:liberty_fashion/src/features/cart/cart_view.dart';
 import 'package:liberty_fashion/src/features/product_customize/product_customize_view.dart';
 import 'package:liberty_fashion/src/features/product_details_image/product_details_image.dart';
 
@@ -97,8 +98,10 @@ class _CollectionDetailsPageState extends State<ProductDetails> {
                     color: primaryColor,
                   ),
                   onPressed: () {
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => CartPage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const CartView()));
                   },
                 ),
                 // Icon(

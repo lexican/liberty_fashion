@@ -29,6 +29,7 @@ class _LibertyFashionAppState extends State<LibertyFashionApp> {
             Bloc((i) => CartTotalBloc()),
             Bloc((i) => WishListBloc())
           ],
+          dependencies: [],
           child: MaterialApp(
             title: 'Liberty Fashion App',
             theme: ThemeData(

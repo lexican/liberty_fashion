@@ -17,7 +17,8 @@ class ProductCustomizeViewActionsButton extends StatelessWidget {
       required this.collectionName,
       required this.addToCart,
       required this.fabric,
-      required this.numberOfYards, required this.product})
+      required this.numberOfYards,
+      required this.product})
       : super(key: key);
 
   @override
@@ -44,14 +45,8 @@ class ProductCustomizeViewActionsButton extends StatelessWidget {
               onPressed: () {
                 if (collectionName == "Fabric") {
                   addToCart(fabric);
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => CartPage(),
-                  //   ),
-                  // );
                 } else {
-                  if (fabric.name == null) {
+                  if (fabric.name == '') {
                     showToast("No Fabric selected",
                         backgroundColor: Colors.red);
                   } else if (numberOfYards > 12) {
@@ -62,12 +57,6 @@ class ProductCustomizeViewActionsButton extends StatelessWidget {
                         backgroundColor: Colors.red);
                   } else {
                     addToCart(product);
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => CartPage(),
-                    //   ),
-                    // );
                   }
                 }
               },
