@@ -17,8 +17,8 @@ class CartItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String productName = product.name ?? "";
-    String fabricName = fabric.name ?? "";
+    String productName = product.name;
+    String fabricName = fabric.name;
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10),
       height: 120,
@@ -73,7 +73,7 @@ class CartItem extends StatelessWidget {
                       margin: const EdgeInsets.symmetric(
                           horizontal: 5, vertical: 5),
                       child: Text(
-                        fabric.name != null ? "1/2" : "1/1",
+                        fabric.name != '' ? "1/2" : "1/1",
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -96,7 +96,7 @@ class CartItem extends StatelessWidget {
                 ),
                 collectionName == "Fabrics"
                     ? Text(
-                        fabric.name ?? "",
+                        fabric.name,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         style: const TextStyle(

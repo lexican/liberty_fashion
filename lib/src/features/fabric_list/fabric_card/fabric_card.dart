@@ -69,11 +69,12 @@ class _FabricCardState extends State<FabricCard> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Flexible(
-                      child: Text(
-                    product.name ?? "",
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  )),
+                    child: Text(
+                      product.name,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
                   IconButton(
                     onPressed: () {
                       widget.onFabricSelected(product);

@@ -123,7 +123,7 @@ class _CollectionDetailsPageState extends State<ProductDetails> {
                       children: <Widget>[
                         Flexible(
                           child: Text(
-                            product.name ?? "",
+                            product.name,
                             style: const TextStyle(fontSize: 20),
                           ),
                         ),

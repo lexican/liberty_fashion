@@ -257,7 +257,7 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
   void addToCart(
     ProductModel product,
   ) {
-    if (fabric.name != null) {
+    if (fabric.name != '') {
       double a = numberOfYards * 2;
       double rounded = a.ceil() / 2;
       print(
@@ -638,9 +638,11 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            fabric.name ?? "No Fabric Selected.",
+                            fabric.name != ''
+                                ? fabric.name
+                                : "No Fabric Selected.",
                             style: TextStyle(
-                              color: fabric.name != null
+                              color: fabric.name != ''
                                   ? Colors.black
                                   : Colors.red,
                               fontSize: 18,

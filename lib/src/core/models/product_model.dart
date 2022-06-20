@@ -6,7 +6,7 @@ class ProductModel {
       this.createDate = -1,
       this.description,
       this.id,
-      this.name,
+      this.name = '',
       this.shortDescription,
       this.productImageUrl,
       this.price = 0});
@@ -15,7 +15,7 @@ class ProductModel {
   int? createDate;
   String? description;
   String? id;
-  String? name;
+  String name;
   String? shortDescription;
   String? productImageUrl;
   dynamic price;

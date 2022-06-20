@@ -61,7 +61,7 @@ class ProductCard extends StatelessWidget {
               children: <Widget>[
                 Flexible(
                   child: Text(
-                    product.name ?? "",
+                    product.name,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
