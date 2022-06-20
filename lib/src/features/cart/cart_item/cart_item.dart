@@ -20,11 +20,12 @@ class _CartItemState extends State<CartItem> {
 
   void removeFromCart(CartModel cartItem) {
     bloc.removeFromList(cartItem);
+    showToast("Product removed from cart");
   }
 
   void moveToWishList(CartModel cartItem) {
     bloc.removeFromList(cartItem);
-    showToast("Item moved to wishlist");
+    showToast("Product moved to wishlist");
 
     logger.i("Clicked");
     wishlistbloc.addToList(cartItem);
