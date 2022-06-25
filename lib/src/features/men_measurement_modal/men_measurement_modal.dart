@@ -120,7 +120,9 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
                 labelText: 'Shoulder(in)',
                 controller: _shoulder,
                 onChanged: (String val) {
-                  measurementMen.shoulder = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementMen.shoulder = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -138,7 +140,9 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
                 labelText: 'Sleeve(in)',
                 controller: _sleeve,
                 onChanged: (String val) {
-                  measurementMen.sleeve = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementMen.sleeve = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -156,7 +160,9 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
                 labelText: 'Chest(in)',
                 controller: _chest,
                 onChanged: (String val) {
-                  measurementMen.chest = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementMen.chest = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -175,7 +181,9 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
                 labelText: 'Top Length(in)',
                 controller: _topLength,
                 onChanged: (String val) {
-                  measurementMen.topLength = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementMen.topLength = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -194,7 +202,9 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
                 labelText: 'Bicep(in)',
                 controller: _bicep,
                 onChanged: (String val) {
-                  measurementMen.bicep = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementMen.bicep = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -213,7 +223,9 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
                 labelText: 'Wrist(in)',
                 controller: _wrist,
                 onChanged: (String val) {
-                  measurementMen.wrist = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementMen.wrist = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -231,7 +243,9 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
                 labelText: 'Waist(in)',
                 controller: _waist,
                 onChanged: (String val) {
-                  measurementMen.waist = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementMen.waist = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -252,7 +266,9 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
                 labelText: 'Trouser Length(in)',
                 controller: _trouserLength,
                 onChanged: (String val) {
-                  measurementMen.trouserLength = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementMen.trouserLength = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -270,7 +286,9 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
                 labelText: 'Thigh(in)',
                 controller: _thigh,
                 onChanged: (String val) {
-                  measurementMen.thigh = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementMen.thigh = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -288,7 +306,9 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
                 labelText: 'Trouser Tip(in)',
                 controller: _trouserTip,
                 onChanged: (String val) {
-                  measurementMen.trouserTip = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementMen.trouserTip = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -310,7 +330,7 @@ class _MenMeasurementModalState extends State<MenMeasurementModal> {
               onChanged: (String val) {
                 measurementMen.info = val;
               },
-              keyboardType: TextInputType.number,
+              keyboardType: TextInputType.text,
             ),
           ),
         ],

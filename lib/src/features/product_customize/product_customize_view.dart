@@ -105,6 +105,8 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
       loadWomenMeasurement();
     } else {
       _numberOfYardsCL.text = widget.cart!.fabricNoOfYards.toString();
+      fabric = widget.cart?.fabric ??
+          ProductModel(createDate: DateTime.now().millisecondsSinceEpoch);
       loadData();
     }
     super.initState();
@@ -265,9 +267,10 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
     if (fabric.name != '') {
       double a = numberOfYards * 2;
       double rounded = a.ceil() / 2;
+      String cartId = mode != "New" ? cart.id : uuid.v1();
       cartBloc.addToList(
         CartModel(
-          id: uuid.v1(),
+          id: cartId,
           product: product,
           fabric: fabric,
           collectionName: collectionName,
@@ -279,7 +282,9 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
           gender: gender,
         ),
       );
-      showToast("Product has been successfully added to your cart");
+      showToast(mode != "New"
+          ? "Product has been successfully updated"
+          : "Product has been successfully added to your cart");
       Navigator.pop(context);
       Navigator.pop(context);
     }

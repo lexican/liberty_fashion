@@ -177,7 +177,9 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
                 labelText: 'Shoulder(in)',
                 controller: _shoulderWn,
                 onChanged: (String val) {
-                  measurementWomen.shoulder = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementWomen.shoulder = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -201,7 +203,9 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
                 labelText: 'Sleeve Short Length(in)',
                 controller: _sleeveshortWn,
                 onChanged: (String val) {
-                  measurementWomen.sleeveShortLength = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementWomen.sleeveShortLength = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -219,7 +223,9 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
                 labelText: 'Sleeve 3/4 Length(in)',
                 controller: _sleeve34Wn,
                 onChanged: (String val) {
-                  measurementWomen.sleeve34Length = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementWomen.sleeve34Length = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -237,7 +243,9 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
                 labelText: 'Sleeve Long/Full Length(in)',
                 controller: _sleeveLongWn,
                 onChanged: (String val) {
-                  measurementWomen.sleeveFullLength = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementWomen.sleeveFullLength = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -261,7 +269,9 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
                 labelText: 'Bust(in)',
                 controller: _bustWn,
                 onChanged: (String val) {
-                  measurementWomen.bust = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementWomen.bust = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -285,7 +295,9 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
                 labelText: 'Bust Point(in)',
                 controller: _bustPointWn,
                 onChanged: (String val) {
-                  measurementWomen.bustPoint = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementWomen.bustPoint = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -309,7 +321,9 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
                 labelText: 'Shoulder To Under Bust(in)',
                 controller: _shoulderToUnderBustWn,
                 onChanged: (String val) {
-                  measurementWomen.shoulderToUnderBust = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementWomen.shoulderToUnderBust = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -332,7 +346,9 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
                 labelText: 'Round Under Bust(in)',
                 controller: _roundUnderBustWn,
                 onChanged: (String val) {
-                  measurementWomen.roundUnderBust = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementWomen.roundUnderBust = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -355,7 +371,9 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
                 labelText: 'Half Length',
                 controller: _halfLengthWn,
                 onChanged: (String val) {
-                  measurementWomen.halfLength = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementWomen.halfLength = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -378,7 +396,9 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
                 labelText: 'Blouse Waist(in)',
                 controller: _blouseWaistWn,
                 onChanged: (String val) {
-                  measurementWomen.blouseWaist = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementWomen.blouseWaist = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -398,7 +418,9 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
                 labelText: 'Blouse Length(in)',
                 controller: _blouseLengthWn,
                 onChanged: (String val) {
-                  measurementWomen.blouseLength = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementWomen.blouseLength = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -419,7 +441,9 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
                 labelText: 'Skirt Waist(in)',
                 controller: _skirtWaistWn,
                 onChanged: (String val) {
-                  measurementWomen.skirtWaist = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementWomen.skirtWaist = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -439,7 +463,9 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
                 labelText: 'Hips(in)',
                 controller: _hipsWn,
                 onChanged: (String val) {
-                  measurementWomen.hips = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementWomen.hips = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -460,7 +486,9 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
                 labelText: 'Dress Half Length(in)',
                 controller: _dress12LengthWn,
                 onChanged: (String val) {
-                  measurementWomen.dressHalfLength = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementWomen.dressHalfLength = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -478,7 +506,9 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
                 labelText: 'Dress Knee Length(in)',
                 controller: _dresskneeLengthWn,
                 onChanged: (String val) {
-                  measurementWomen.dressKneeLength = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementWomen.dressKneeLength = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -496,7 +526,9 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
                 labelText: 'Dress 3/4 Length(in)',
                 controller: _dress34LengthWn,
                 onChanged: (String val) {
-                  measurementWomen.dress34Length = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementWomen.dress34Length = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -514,7 +546,9 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
                 labelText: 'Dress Floor Length(in)',
                 controller: _dressfloorLengthWn,
                 onChanged: (String val) {
-                  measurementWomen.dressFloorLength = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementWomen.dressFloorLength = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -534,7 +568,9 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
                 labelText: 'Skirt Short Length(in)',
                 controller: _skirtShortLengthWn,
                 onChanged: (String val) {
-                  measurementWomen.skirtShortLength = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementWomen.skirtShortLength = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -552,7 +588,9 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
                 labelText: 'Skirt Knee Length(in)',
                 controller: _skirtKneeLengthWn,
                 onChanged: (String val) {
-                  measurementWomen.skirtKneeLength = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementWomen.skirtKneeLength = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -570,7 +608,9 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
                 labelText: 'Skirt 3/4 Length(in)',
                 controller: _skirt34LengthWn,
                 onChanged: (String val) {
-                  measurementWomen.skirt34Length = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementWomen.skirt34Length = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>
@@ -588,7 +628,9 @@ class _WomenMeasurementModalState extends State<WomenMeasurementModal> {
                 labelText: 'Skirt Long Length(in)',
                 controller: _skirtLongLengthWn,
                 onChanged: (String val) {
-                  measurementWomen.skirtFloorLength = double.parse(val);
+                  if (val.isNotEmpty) {
+                    measurementWomen.skirtFloorLength = double.parse(val);
+                  }
                 },
                 keyboardType: TextInputType.number,
                 validator: (val) =>

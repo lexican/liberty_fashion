@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:liberty_fashion/src/core/bloc/bloc.dart';
 import 'package:liberty_fashion/src/core/models/models.dart';
+import 'package:liberty_fashion/src/features/product_customize/product_customize_view.dart';
 
 import '../../../core/utils/utils.dart';
 
@@ -188,18 +189,17 @@ class _CartItemState extends State<CartItem> {
                 IconButton(
                   icon: const Icon(Icons.edit),
                   onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) => ProceedPage(
-                    //             cartItem: cartItem.cartItem,
-                    //             src: cartItem.src,
-                    //             price: cartItem.price,
-                    //             collectionName: cartItem.collectionName,
-                    //             mode: "Edit",
-                    //             cart: cartItem,
-                    //           ),),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductCustomizeView(
+                          cart: cartItem,
+                          collectionName: cartItem.collectionName ?? '',
+                          mode: "Edit",
+                          product: cartItem.product ?? ProductModel(),
+                        ),
+                      ),
+                    );
                   },
                   color: primaryColor,
                 ),
