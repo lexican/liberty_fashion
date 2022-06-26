@@ -1,6 +1,7 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:liberty_fashion/src/core/bloc/bloc.dart';
 import 'package:liberty_fashion/src/core/models/models.dart';
 import 'package:liberty_fashion/src/features/cart_details/cart_details_view.dart';
@@ -10,7 +11,9 @@ import '../../../core/utils/utils.dart';
 
 class CartItem extends StatefulWidget {
   final CartModel cartItem;
-  const CartItem({Key? key, required this.cartItem}) : super(key: key);
+  final bool isCartItem;
+  const CartItem({Key? key, required this.cartItem, this.isCartItem = true})
+      : super(key: key);
 
   @override
   _CartItemState createState() => _CartItemState();
@@ -20,12 +23,14 @@ class _CartItemState extends State<CartItem> {
   final CartBloc bloc = BlocProvider.getBloc<CartBloc>();
   final WishListBloc wishlistbloc = BlocProvider.getBloc<WishListBloc>();
 
-  void removeFromCart(CartModel cartItem) {
+  late bool isCartItem;
+
+  void removeFromCart() {
     bloc.removeFromList(cartItem);
     showToast("Product removed from cart");
   }
 
-  void moveToWishList(CartModel cartItem) {
+  void moveToWishList() {
     bloc.removeFromList(cartItem);
     showToast("Product moved to wishlist");
 
@@ -33,10 +38,28 @@ class _CartItemState extends State<CartItem> {
     wishlistbloc.addToList(cartItem);
   }
 
+  void moveToCartList() {
+    wishlistbloc.removeFromList(cartItem);
+    Fluttertoast.showToast(
+        msg: "Item moved to Cart",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
+    bloc.addToList(cartItem);
+  }
+
+  void removeFromWishList() {
+    wishlistbloc.removeFromList(cartItem);
+  }
+
   late CartModel cartItem;
   @override
   void initState() {
     cartItem = widget.cartItem;
+    isCartItem = widget.isCartItem;
     super.initState();
   }
 
@@ -184,9 +207,15 @@ class _CartItemState extends State<CartItem> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 IconButton(
-                    icon: const Icon(Icons.favorite_border),
+                    icon: Icon(
+                      isCartItem ? Icons.favorite_border : Icons.shopping_cart,
+                    ),
                     onPressed: () {
-                      moveToWishList(cartItem);
+                      if (isCartItem) {
+                        moveToWishList();
+                      } else {
+                        moveToCartList();
+                      }
                     },
                     color: primaryColor),
                 IconButton(
@@ -209,7 +238,11 @@ class _CartItemState extends State<CartItem> {
                 IconButton(
                   icon: const Icon(Icons.delete),
                   onPressed: () {
-                    removeFromCart(cartItem);
+                    if (isCartItem) {
+                      removeFromCart();
+                    } else {
+                      removeFromWishList();
+                    }
                   },
                   color: primaryColor,
                 ),

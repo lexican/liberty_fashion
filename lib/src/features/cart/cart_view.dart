@@ -4,6 +4,7 @@ import 'package:liberty_fashion/src/core/bloc/bloc.dart';
 import 'package:liberty_fashion/src/core/models/models.dart';
 import 'package:liberty_fashion/src/features/cart/cart_item/cart_item.dart';
 import 'package:liberty_fashion/src/features/cart/cart_view_bottom_toolbar/cart_view_bottom_toolbar.dart';
+import 'package:liberty_fashion/src/features/wish_List/wish_list_view.dart';
 
 import '../../core/utils/utils.dart';
 
@@ -42,8 +43,8 @@ class _CartViewState extends State<CartView> {
           actions: [
             IconButton(
               onPressed: () {
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => WishList(),),);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const WishListView(),),);
               },
               icon: const Icon(
                 Icons.favorite,
