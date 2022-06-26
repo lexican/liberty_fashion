@@ -43,8 +43,12 @@ class _CartViewState extends State<CartView> {
           actions: [
             IconButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const WishListView(),),);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const WishListView(),
+                  ),
+                );
               },
               icon: const Icon(
                 Icons.favorite,
@@ -79,7 +83,10 @@ class _CartViewState extends State<CartView> {
                           primary: false,
                           shrinkWrap: true,
                           itemBuilder: (BuildContext context, int i) {
-                            return CartItem(cartItem: items[i]);
+                            return CartItem(
+                              cartItem: items[i],
+                              key: Key(items[i].id),
+                            );
                           },
                         );
                       } else {

@@ -5,17 +5,12 @@ class WishListProvider {
   List<CartModel> wishListitems = [];
 
   List<CartModel> addToList(CartModel cartItem) {
-    logger.i("price: ${cartItem.product}");
-    logger.i("total: ${cartItem.product}");
-    logger.i("quantity: ${cartItem.quantity}");
-    logger.i("id: ${cartItem.id}");
-
     wishListitems.add(cartItem);
     return wishListitems;
   }
 
   List<CartModel> removeFromList(CartModel cartItem) {
-    wishListitems.remove(cartItem);
+    wishListitems.removeWhere((element) => element.id == cartItem.id);
     return wishListitems;
   }
 

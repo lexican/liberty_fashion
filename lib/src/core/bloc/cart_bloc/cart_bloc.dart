@@ -24,14 +24,14 @@ class CartBloc extends BlocBase {
 
   void addToList(CartModel item) {
     cartListSink.add(provider.addToList(item));
-    bloc.inCartTotal.add(provider.addTotal());
-    print('cart length: ' + provider.getCartList().length.toString());
+    //bloc.inCartTotal.add(provider.addTotal());
+    //print('cart length: ' + provider.getCartList().length.toString());
     notifyListeners();
   }
 
   void removeFromList(CartModel item) {
     cartListSink.add(provider.removeFromList(item));
-    bloc.inCartTotal.add(provider.addTotal());
+    //bloc.inCartTotal.add(provider.addTotal());
     notifyListeners();
   }
   // increment(id){

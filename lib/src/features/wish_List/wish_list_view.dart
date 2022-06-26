@@ -85,6 +85,7 @@ class _WishListViewState extends State<WishListView> {
                           return CartItem(
                             cartItem: items[i],
                             isCartItem: false,
+                            key: Key(items[i].id),
                           );
                         },
                       );

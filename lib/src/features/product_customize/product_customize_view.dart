@@ -22,8 +22,6 @@ import 'package:liberty_fashion/src/features/women_measurement_view/women_measur
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
-var uuid = const Uuid();
-
 class ProductCustomizeView extends StatefulWidget {
   final ProductModel product;
   final CartModel? cart;
@@ -57,6 +55,8 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
 
   bool showMeasurement = false;
 
+  late String uuid;
+
   MenMeasurementModel measurementMen = MenMeasurementModel();
   WomenMeasurementModel measurementWomen = WomenMeasurementModel();
 
@@ -77,6 +77,9 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
     product = widget.product;
     collectionName = widget.collectionName;
     mode = widget.mode;
+
+    uuid = const Uuid().v4();
+
     if (widget.cart != null) {
       cart = widget.cart!;
     }
@@ -267,7 +270,7 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
     if (fabric.name != '') {
       double a = numberOfYards * 2;
       double rounded = a.ceil() / 2;
-      String cartId = mode != "New" ? cart.id : uuid.v1();
+      String cartId = mode != "New" ? cart.id : uuid;
       cartBloc.addToList(
         CartModel(
           id: cartId,
@@ -282,11 +285,16 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
           gender: gender,
         ),
       );
+
+      logger.i("uuid: $uuid");
+
+      uuid = const Uuid().v4();
+      
       showToast(mode != "New"
           ? "Product has been successfully updated"
           : "Product has been successfully added to your cart");
-      Navigator.pop(context);
-      Navigator.pop(context);
+      // Navigator.pop(context);
+      // Navigator.pop(context);
     }
   }
 

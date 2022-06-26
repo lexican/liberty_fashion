@@ -1,5 +1,6 @@
 import 'package:liberty_fashion/src/core/models/models.dart';
 import 'package:liberty_fashion/src/core/utils/utils.dart';
+import 'package:logger/logger.dart';
 
 class CartProvider {
   List<CartModel> cartitems = [];
@@ -8,20 +9,14 @@ class CartProvider {
     bool isPresent = false;
     int index = -1;
 
-    // print("price: ${cartItem.price}");
-    // print("total: ${cartItem.total}");
-    // print("quantity: ${cartItem.quantity}");
-    // print("id: ${cartItem.id}");
-
-    //cartitems.add(cartItem);
-
     if (cartitems.isNotEmpty) {
       for (int i = 0; i < cartitems.length; i++) {
         // logger.i("new cartItem id: " + cartItem.id);
         // print("cartId: " + cartitems[i].id);
-        logger
-            .i(cartItem.id.toString().trim() == cartitems[i].id.toString().trim());
-        if (cartItem.id.toString().trim() == cartitems[i].id.toString().trim()) {
+        logger.i(
+            cartItem.id.toString().trim() == cartitems[i].id.toString().trim());
+        if (cartItem.id.toString().trim() ==
+            cartitems[i].id.toString().trim()) {
           isPresent = true;
           index = i;
         }
@@ -40,62 +35,12 @@ class CartProvider {
   }
 
   List<CartModel> removeFromList(CartModel cartItem) {
-    cartitems.remove(cartItem);
+    logger.i("remove cartItem with id: ${cartItem.id}");
+    cartitems.removeWhere((element) => element.id == cartItem.id);
     return cartitems;
   }
 
   List<CartModel> getCartList() {
-    return cartitems;
-  }
-
-  List<CartModel> incrementQuantity(id) {
-    //TODO Implement later
-    // var tempCart = [...cartitems];
-    // CartModel? cartItemToIncrement;
-    // if (tempCart.isNotEmpty) {
-    //   for (int i = 0; i < tempCart.length; i++) {
-    //     if (tempCart[i].id == id) {
-    //       cartItemToIncrement = tempCart[i];
-    //       break;
-    //     }
-    //   }
-    //   if (cartItemToIncrement != null) {
-    //     var index = tempCart.indexOf(cartItemToIncrement);
-    //     var product = tempCart[index];
-    //     product.quantity = product.quantity + 1;
-    //     product.total = product.quantity * product.price;
-    //     cartitems = [...tempCart];
-    //   }
-    // }
-    // addTotal();
-    return cartitems;
-  }
-
-  List<CartModel> decrementQuantity(id) {
-    //TODO Implement later
-    // var tempCart = [...cartitems];
-    // CartModel? cartItemToIncrement;
-    // if (tempCart.isNotEmpty) {
-    //   for (int i = 0; i < tempCart.length; i++) {
-    //     if (tempCart[i].id == id) {
-    //       cartItemToIncrement = tempCart[i];
-    //       break;
-    //     }
-    //   }
-    //   if (cartItemToIncrement != null) {
-    //     var index = tempCart.indexOf(cartItemToIncrement);
-    //     var product = tempCart[index];
-    //     product.quantity = product.quantity - 1;
-    //     if (product.quantity == 0) {
-    //       cartitems.remove(product);
-    //       //removeItem(id);
-    //     } else {
-    //       product.total = product.quantity * product.price;
-    //       cartitems = [...tempCart];
-    //     }
-    //   }
-    // }
-    // addTotal();
     return cartitems;
   }
 

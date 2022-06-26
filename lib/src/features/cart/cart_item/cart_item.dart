@@ -31,15 +31,14 @@ class _CartItemState extends State<CartItem> {
   }
 
   void moveToWishList() {
+    logger.i("cartItem: ${cartItem.id}");
     bloc.removeFromList(cartItem);
-    showToast("Product moved to wishlist");
-
-    logger.i("Clicked");
-    wishlistbloc.addToList(cartItem);
+    // showToast("Product moved to wishlist");
+    // wishlistbloc.addToList(cartItem);
   }
 
   void moveToCartList() {
-    wishlistbloc.removeFromList(cartItem);
+    //wishlistbloc.removeFromList(cartItem);
     Fluttertoast.showToast(
         msg: "Item moved to Cart",
         toastLength: Toast.LENGTH_SHORT,

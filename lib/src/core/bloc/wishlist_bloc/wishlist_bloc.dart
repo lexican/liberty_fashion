@@ -25,7 +25,6 @@ class WishListBloc extends BlocBase {
 
   void addToList(CartModel cartItem) {
     cartListSink.add(provider.addToList(cartItem));
-    logger.i('wishList length: ' + provider.getCartList().length.toString());
     notifyListeners();
   }
 
@@ -33,16 +32,6 @@ class WishListBloc extends BlocBase {
     cartListSink.add(provider.removeFromList(cartItem));
     notifyListeners();
   }
-  // increment(id){
-  //   cartListSink.add(provider.incrementQuantity(id));
-  //   bloc.inCartTotal.add(provider.addTotal());
-  //   notifyListeners();
-  // }
-  // decrement(id){
-  //   cartListSink.add(provider.decrementQuantity(id));
-  //   bloc.inCartTotal.add(provider.addTotal());
-  //   notifyListeners();
-  // }
 
   void addTotal() {
     logger.i('Cart total from provider' + cartTotal.toString());

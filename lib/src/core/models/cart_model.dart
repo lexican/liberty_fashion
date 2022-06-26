@@ -31,18 +31,17 @@ class CartModel {
   factory CartModel.fromSnapshot(DocumentSnapshot doc) {
     Map? getDocs = doc.data() as Map?;
     return CartModel(
-      id: doc.id,
-      product: getDocs!['product'],
-      fabric: getDocs['fabric'],
-      collectionName: getDocs['collectionName'],
-      menMeasurement: getDocs['menMeasurement'],
-      womenMeasurement: getDocs['womenMeasurement'],
-      menStyle: getDocs['menStyle'],
-      womenStyle: getDocs['womenStyle'],
-      quantity: getDocs['quantity'],
-      fabricNoOfYards: getDocs['fabricNoOfYards'],
-      gender: getDocs['gender']
-    );
+        id: doc.id,
+        product: getDocs!['product'],
+        fabric: getDocs['fabric'],
+        collectionName: getDocs['collectionName'],
+        menMeasurement: getDocs['menMeasurement'],
+        womenMeasurement: getDocs['womenMeasurement'],
+        menStyle: getDocs['menStyle'],
+        womenStyle: getDocs['womenStyle'],
+        quantity: getDocs['quantity'],
+        fabricNoOfYards: getDocs['fabricNoOfYards'],
+        gender: getDocs['gender']);
   }
 
   Map<String, dynamic> toJson() => {
@@ -58,4 +57,12 @@ class CartModel {
         "fabricNoOfYards": fabricNoOfYards,
         "gender": gender
       };
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CartModel && runtimeType == other.runtimeType && id == other.id;
+
+  @override
+  int get hashCode => id.hashCode;
 }
