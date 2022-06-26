@@ -55,6 +55,7 @@ dependencies:
   keyboard_dismisser: ^3.0.0
   get_it: ^7.2.0
   firebase_crashlytics: ^2.8.1
+  carousel_slider: ^4.1.1
 
 
 dev_dependencies:

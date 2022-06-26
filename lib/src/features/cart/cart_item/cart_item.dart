@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:liberty_fashion/src/core/bloc/bloc.dart';
 import 'package:liberty_fashion/src/core/models/models.dart';
+import 'package:liberty_fashion/src/features/cart_details/cart_details_view.dart';
 import 'package:liberty_fashion/src/features/product_customize/product_customize_view.dart';
 
 import '../../../core/utils/utils.dart';
@@ -58,12 +59,14 @@ class _CartItemState extends State<CartItem> {
         children: [
           GestureDetector(
             onTap: () {
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) => CartDetailsPage(
-              //               cartItem: cartItem,
-              //             ),),);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CartDetailsView(
+                    cartItem: cartItem,
+                  ),
+                ),
+              );
             },
             child: Container(
               height: 120,

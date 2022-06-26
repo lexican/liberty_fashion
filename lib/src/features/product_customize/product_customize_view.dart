@@ -227,7 +227,7 @@ class _ProductCustomizeViewState extends State<ProductCustomizeView> {
       });
     }
 
-    if (cart.menMeasurement != null) {
+    if (cart.gender == "Male") {
       measurementMen.shoulder = cart.menMeasurement?.shoulder ?? 0.0;
       measurementMen.sleeve = cart.menMeasurement?.sleeve ?? 0.0;
       measurementMen.chest = cart.menMeasurement?.chest ?? 0.0;
