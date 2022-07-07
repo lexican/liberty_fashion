@@ -23,7 +23,7 @@ class _ProductsState extends State<Products> {
 
   String getAppBarTitle() {
     if (widget.collectionCategory.collectionName != "Fabrics") {
-      return widget.collectionCategory.collectionName + "'s Collections";
+      return "${widget.collectionCategory.collectionName}'s Collections";
     }
     return "Fabrics";
   }
@@ -90,10 +90,15 @@ class _ProductsState extends State<Products> {
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData) {
               if (snapshot.data != null) {
-                List<ProductModel> collections =
-                    snapshot.data!.docs.map((DocumentSnapshot doc) {
-                  return ProductModel.fromSnapshot(doc);
-                }).toList();
+                List<ProductModel> collections = [];
+
+                try {
+                  collections = snapshot.data!.docs.map((DocumentSnapshot doc) {
+                    return ProductModel.fromSnapshot(doc);
+                  }).toList();
+                } catch (e) {
+                  logger.e(e);
+                }
 
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),

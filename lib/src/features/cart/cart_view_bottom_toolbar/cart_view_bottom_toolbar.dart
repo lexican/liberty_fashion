@@ -2,6 +2,7 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:liberty_fashion/src/core/bloc/bloc.dart';
 import 'package:liberty_fashion/src/core/utils/utils.dart';
+import 'package:liberty_fashion/src/features/delivery_address/delivery_address_view.dart';
 
 class CartItemBottomToolbar extends StatelessWidget {
   const CartItemBottomToolbar({Key? key}) : super(key: key);
@@ -27,8 +28,9 @@ class CartItemBottomToolbar extends StatelessWidget {
               StreamBuilder(
                 stream: blocTotal.outCartTotal,
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  double total = snapshot.data;
                   return Text(
-                    "\u20A6" + moneyFormat(snapshot.data.toString()),
+                    "\u20A6${moneyFormat(total.toInt().toString())}",
                     style: const TextStyle(
                       color: Color(0xFF686868),
                       fontSize: 18,
@@ -78,10 +80,12 @@ class CartItemBottomToolbar extends StatelessWidget {
                   textColor: Colors.white,
                   padding: const EdgeInsets.all(8.0),
                   onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => AddressPage(),),);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const DeliveryAddressView(),
+                      ),
+                    );
                   },
                   child: Text(
                     "BUY".toUpperCase(),

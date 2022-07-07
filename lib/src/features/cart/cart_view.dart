@@ -27,6 +27,7 @@ class _CartViewState extends State<CartView> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
+          centerTitle: true,
           leading: IconButton(
             icon: const Icon(
               Icons.arrow_back,

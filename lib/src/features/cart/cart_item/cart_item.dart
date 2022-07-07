@@ -33,12 +33,12 @@ class _CartItemState extends State<CartItem> {
   void moveToWishList() {
     logger.i("cartItem: ${cartItem.id}");
     bloc.removeFromList(cartItem);
-    // showToast("Product moved to wishlist");
-    // wishlistbloc.addToList(cartItem);
+    showToast("Product moved to wishlist");
+    wishlistbloc.addToList(cartItem);
   }
 
   void moveToCartList() {
-    //wishlistbloc.removeFromList(cartItem);
+    wishlistbloc.removeFromList(cartItem);
     Fluttertoast.showToast(
         msg: "Item moved to Cart",
         toastLength: Toast.LENGTH_SHORT,
@@ -161,7 +161,7 @@ class _CartItemState extends State<CartItem> {
                             child: Text(
                               cartItem.product!.name +
                                   (cartItem.fabric != null
-                                      ? (" + " + cartItem.fabric!.name)
+                                      ? (" + ${cartItem.fabric!.name}")
                                       : ""),
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
@@ -175,10 +175,7 @@ class _CartItemState extends State<CartItem> {
                         height: 10,
                       ),
                       Text(
-                        "\u20A6 " +
-                            moneyFormat((cartItem.product!.price +
-                                    cartItem.fabric!.price)
-                                .toString()),
+                        "\u20A6 ${moneyFormat((cartItem.product!.price + cartItem.fabric!.price).toString())}",
                         style: const TextStyle(
                           fontSize: 18,
                           color: Color(0xFF686868),

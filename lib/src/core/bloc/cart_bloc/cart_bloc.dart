@@ -24,30 +24,18 @@ class CartBloc extends BlocBase {
 
   void addToList(CartModel item) {
     cartListSink.add(provider.addToList(item));
-    //bloc.inCartTotal.add(provider.addTotal());
-    //print('cart length: ' + provider.getCartList().length.toString());
+    bloc.inCartTotal.add(provider.addTotal());
     notifyListeners();
   }
 
   void removeFromList(CartModel item) {
     cartListSink.add(provider.removeFromList(item));
-    //bloc.inCartTotal.add(provider.addTotal());
+    bloc.inCartTotal.add(provider.addTotal());
     notifyListeners();
   }
-  // increment(id){
-  //   cartListSink.add(provider.incrementQuantity(id));
-  //   bloc.inCartTotal.add(provider.addTotal());
-  //   notifyListeners();
-  // }
-  // decrement(id){
-  //   cartListSink.add(provider.decrementQuantity(id));
-  //   bloc.inCartTotal.add(provider.addTotal());
-  //   notifyListeners();
-  // }
 
   void addTotal() {
     bloc.inCartTotal.add(provider.addTotal());
-    print('Cart total from provider' + cartTotal.toString());
     notifyListeners();
   }
 

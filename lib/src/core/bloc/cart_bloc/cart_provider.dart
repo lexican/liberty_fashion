@@ -11,8 +11,6 @@ class CartProvider {
 
     if (cartitems.isNotEmpty) {
       for (int i = 0; i < cartitems.length; i++) {
-        // logger.i("new cartItem id: " + cartItem.id);
-        // print("cartId: " + cartitems[i].id);
         logger.i(
             cartItem.id.toString().trim() == cartitems[i].id.toString().trim());
         if (cartItem.id.toString().trim() ==
@@ -83,7 +81,6 @@ class CartProvider {
             total + cartitems[i].product?.price + cartitems[i].fabric?.price;
       }
     }
-    logger.i('Total: ' + total.toString());
     return total;
   }
 
