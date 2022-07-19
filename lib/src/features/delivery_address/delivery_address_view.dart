@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:liberty_fashion/src/core/api/orders_api.dart';
 import 'package:liberty_fashion/src/core/bloc/bloc.dart';
 import 'package:liberty_fashion/src/core/models/models.dart';
 import 'package:liberty_fashion/src/core/utils/utils.dart';
@@ -35,6 +36,8 @@ class _DeliveryAddressViewState extends State<DeliveryAddressView>
 
   final CartTotalBloc blocTotal = BlocProvider.getBloc<CartTotalBloc>();
   final CartBloc bloc = BlocProvider.getBloc<CartBloc>();
+
+  OrdersApi ordersApi = OrdersApi();
 
   var publicKey = 'pk_test_741153c540ee9bb4f992e7e55d5bc4a44e6aaefe';
   var sk_test = "sk_test_bcf2323f9c4cb0924d73923de15e7e3db488ee05";
@@ -112,7 +115,19 @@ class _DeliveryAddressViewState extends State<DeliveryAddressView>
         logger.i(prefs.getString('email') ?? "");
         logger.i(prefs.getString('phoneNumber') ?? "");
         logger.i(prefs.getString("selectedLocation") ?? "");
-        //chargeCard(total.toInt());
+
+        //TOD IMPLEMENT
+
+        final CartBloc bloc = BlocProvider.getBloc<CartBloc>();
+
+        List<CartModel> cartList = [];
+
+        bloc.cartListStream.forEach((carts) {
+          cartList = carts;
+        });
+
+        logger.i("cart list length : ${cartList.length}");
+        
       } else {
         Fluttertoast.showToast(
             msg: "Choose a location",
