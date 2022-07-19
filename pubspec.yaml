@@ -91,6 +91,7 @@ flutter:
     - assets/images/measurement.svg
     - assets/images/trending.jpg
     - assets/images/tailor.jpg
+    - assets/images/brand_logo.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

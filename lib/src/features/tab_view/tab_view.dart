@@ -4,7 +4,7 @@ import 'package:liberty_fashion/src/core/services/analytics_service/analytics_se
 import 'package:liberty_fashion/src/core/services/locator/locator.dart';
 import 'package:liberty_fashion/src/core/utils/utils.dart';
 import 'package:liberty_fashion/src/features/home/home.dart';
-
+import 'package:liberty_fashion/src/features/profile/profile.dart';
 
 class TabView extends StatefulWidget {
   const TabView({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class _TabViewState extends State<TabView> with RouteAware {
   static final List<Widget> _widgetOptions = <Widget>[
     const Home(),
     Container(),
-    Container()
+    const Profile()
   ];
 
   void _setCurrentTabIndex(int index) {
