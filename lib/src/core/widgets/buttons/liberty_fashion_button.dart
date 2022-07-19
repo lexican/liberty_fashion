@@ -34,23 +34,26 @@ class LibertyFashionButton extends StatelessWidget {
       style: ButtonStyle(
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
-              borderRadius:
-                  outline ? BorderRadius.circular(4) : BorderRadius.zero,
+              borderRadius: BorderRadius.circular(8),
               side: BorderSide(
                   color: outline ? primaryColor : Colors.transparent)),
         ),
-        backgroundColor:
-            MaterialStateProperty.all(buttonBackgroundColor ?? primaryColor),
-      ),
-      child: Text(
-        buttonText,
-        style: TextStyle(
-          fontSize: buttonTextFontSize ?? 18,
-          color: buttonTextColor ?? Colors.white,
-          fontFamily: "SegoeUi",
-        ),
+        backgroundColor: outline
+            ? MaterialStateProperty.all(Colors.transparent)
+            : MaterialStateProperty.all(buttonBackgroundColor ?? primaryColor),
       ),
       onPressed: onPressed,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 6),
+        child: Text(
+          buttonText,
+          style: TextStyle(
+            fontSize: buttonTextFontSize ?? 18,
+            color: buttonTextColor ?? Colors.white,
+            fontFamily: "SegoeUi",
+          ),
+        ),
+      ),
     );
   }
 }
