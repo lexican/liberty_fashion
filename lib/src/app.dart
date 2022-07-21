@@ -1,5 +1,6 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:liberty_fashion/src/core/services/analytics_service/analytics_service.dart';
@@ -39,6 +40,7 @@ class _LibertyFashionAppState extends State<LibertyFashionApp> {
             navigatorObservers: <NavigatorObserver>[
               locator<AnalyticsServiceImpl>().firebaseAnalyticsObserver,
             ],
+            builder: EasyLoading.init(),
           ),
         ),
       ),
