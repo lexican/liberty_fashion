@@ -10,21 +10,41 @@ class LibertyFashionTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
-   const LibertyFashionTextField(
-      {Key? key,
-      this.labelText,
-      this.labelStyle,
-      this.controller,
-      this.textStyle,
-      this.onChanged,
-      this.keyboardType,
-      this.validator, this.inputFormatters})
-      : super(key: key);
+  final bool obscureText;
+  final Function? setObscureText;
+  final bool isPassword;
+  const LibertyFashionTextField({
+    Key? key,
+    this.labelText,
+    this.labelStyle,
+    this.controller,
+    this.textStyle,
+    this.onChanged,
+    this.keyboardType,
+    this.validator,
+    this.inputFormatters,
+    this.obscureText = false,
+    this.setObscureText,
+    this.isPassword = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       decoration: InputDecoration(
+        suffixIcon: isPassword
+            ? IconButton(
+                icon: Icon(
+                  obscureText ? Icons.visibility : Icons.visibility_off,
+                  color: Theme.of(context).primaryColorDark,
+                ),
+                onPressed: () {
+                  if (setObscureText != null) {
+                    setObscureText!();
+                  }
+                },
+              )
+            : const SizedBox(),
         labelText: labelText,
         labelStyle: labelStyle ??
             const TextStyle(
@@ -43,6 +63,7 @@ class LibertyFashionTextField extends StatelessWidget {
           const TextStyle(
               color: Colors.black87, fontSize: 14, fontFamily: 'SegoeUi'),
       validator: validator,
+      obscureText: obscureText,
     );
   }
 }

@@ -26,7 +26,7 @@ String moneyFormat(String price) {
   return price;
 }
 
-String validateEmail(String value) {
+String? validateEmail(String value) {
   RegExp regex =
       RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
           r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
@@ -34,7 +34,7 @@ String validateEmail(String value) {
   if (!regex.hasMatch(value) || value.isEmpty) {
     return 'Enter a valid email address';
   } else {
-    return '';
+    return null;
   }
 }
 
@@ -45,14 +45,23 @@ bool isNumeric(String s) {
   return double.tryParse(s) != null;
 }
 
-String validateText(value, fieldName) {
+String? validateText(value, fieldName) {
   if (value.isEmpty) {
     return '$fieldName is required';
   }
-  return '';
+  return null;
 }
 
-String validatePhoneNumber(String value) {
+String? validatePassword(value) {
+  if (value.isEmpty) {
+    return 'Password is required';
+  } else if (value.length < 6) {
+    return "Password should be at least 6 characters";
+  }
+  return null;
+}
+
+String? validatePhoneNumber(String value) {
   if (value.length != 11) {
     return 'Mobile Number must be of 10 digit';
   }
@@ -60,7 +69,7 @@ String validatePhoneNumber(String value) {
   if (!regex.hasMatch(value)) {
     return 'Enter a valid phone number';
   } else {
-    return '';
+    return null;
   }
 }
 
