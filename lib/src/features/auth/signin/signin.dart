@@ -7,6 +7,7 @@ import 'package:liberty_fashion/src/core/utils/app_utils.dart';
 import 'package:liberty_fashion/src/core/widgets/app_bar/liberty_fashion_appbar.dart';
 import 'package:liberty_fashion/src/core/widgets/buttons/liberty_fashion_button.dart';
 import 'package:liberty_fashion/src/core/widgets/input_fields/liberty_fashion_text_field.dart';
+import 'package:liberty_fashion/src/features/auth/reset_password/reset_password.dart';
 import 'package:liberty_fashion/src/features/auth/signup/signup.dart';
 import 'package:liberty_fashion/src/core/models/user_model.dart' as user_model;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -179,7 +180,14 @@ class _SignInState extends State<SignIn> {
                   height: 14.5,
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ResetPasswordView(),
+                      ),
+                    );
+                  },
                   child: const Text(
                     "Forget Password?",
                     style: TextStyle(
